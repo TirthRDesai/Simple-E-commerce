@@ -1,21 +1,34 @@
 function createProductCard(productData) {
-  const { imageSrc, imageAlt, price, productName, oldPrice, newPrice } = productData;
+  let { productId, imageSrc, productDescription, price, productName } = productData;
+
+  if (productDescription === undefined) {
+    productDescription = "";
+  }
+
+  if (price === undefined) {
+    price = 0;
+  }
+
+  if (productName === undefined) {
+    productName = "";
+  }
 
   return `
-  <div class="productCardContainer bg-[url('${imageSrc}')]">
+  <div class="productCardContainer bg-[url('${imageSrc}')]" id="productCard"+${productId}>
   <div class="productCardOverlay">
     <div class = "productCardItems"></div>
     <div class = "productCardItems productCardHead">
-      <p>${productName}</p>
+      <p class="radio-canada-big ">${productName}</p>
       <hr>
+      
     </div>
-    <div class = "productCardItems productCardPrice flex flex-col gap-4">
-      <p class="OldPrice">$699</p>
-      <p class="NewPrice">$345</p>
+    <p class="productCardDescription line-clamp-5"> ${productDescription} </p>
+    <div class = "productCardItems productCardPrice flex flex-col gap-8 items-center justify-center h-1/4">
+      <p class="OldPrice antialiased inter text-base">Price: $${price}</p>
     </div>
     <div class="productCardItems productCardCart">
       <i class="fa fa-shopping-cart"></i>
-      <span>ADD TO CART</span>
+      <span onclick = "addToCart(${productData})">ADD TO CART</span>
   </div>
 </div>
 </div>

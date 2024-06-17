@@ -1,0 +1,15 @@
+.categories-filter-selector {
+	width: 100%;
+	text-align: start;
+	padding: 15px 40px;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: 0.2s all linear;
+}
+
+.selected-category-filter,
+.categories-filter-selector:hover {
+	background-color: #f8f8f8;
+	filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+		drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+}

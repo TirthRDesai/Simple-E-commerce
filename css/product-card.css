@@ -46,6 +46,16 @@
 	transition: all 0.5s;
 }
 
+.productCardDescription {
+	font-size: 16px;
+	line-height: 20px;
+	text-align: justify;
+	width: 80%;
+	transform: translateY(40px);
+	transition: all 0.7s;
+	opacity: 0;
+}
+
 .productCardPrice {
 	font-size: 22px;
 	line-height: 10px;
@@ -53,15 +63,6 @@
 	opacity: 0;
 	transform: translateY(40px);
 	transition: all 0.7s;
-}
-
-.productCardPrice .OldPrice {
-	text-decoration: line-through;
-	color: lighten(rgb(77, 77, 77), 40%);
-}
-
-.productCardPrice .NewPrice {
-	color: darken(rgb(77, 77, 77), 40%);
 }
 
 .productCardCart {
@@ -91,6 +92,12 @@
 
 .productCardContainer:hover hr {
 	width: 75px;
+}
+
+.productCardContainer:hover .productCardDescription {
+	transform: translateY(0px);
+	transition-delay: 0.2s;
+	opacity: 1;
 }
 
 .productCardContainer:hover .productCardPrice {
