@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>E-commerce Page</title>
+
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+			integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+
+		<link
+			rel="stylesheet"
+			href="./css/navbar.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="./css/index.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="./css/globals.css"
+		/>
+
+		<link
+			rel="stylesheet"
+			href="./css/product-card.css"
+		/>
+
+		<script src="https://cdn.tailwindcss.com"></script>
+		<!-- <link
+			href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+			rel="stylesheet"
+		/> -->
+
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+		/>
+
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/pagedone@1.1.2/src/css/pagedone.css"
+		/>
+	</head>
+	<body>
+		<!-- NAVBAR START -->
+		<nav class="bg-gray-800 h-fit w-full fixed">
+			<div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+				<div
+					class="relative flex h-16 items-center justify-between"
+					id="mobileMenuBox"
+				>
+					<div
+						class="absolute inset-y-0 left-0 flex items-center sm:hidden"
+					>
+						<!-- Mobile menu button-->
+						<button
+							type="button"
+							class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+							aria-controls="mobile-menu"
+							aria-expanded="false"
+							onclick="expandNavbar()"
+						>
+							<span class="absolute -inset-0.5"></span>
+							<span class="sr-only">Open main menu</span>
+							<!--
+            Icon when menu is closed.
+
+            Menu open: "hidden", Menu closed: "block"
+          -->
+							<svg
+								class="block h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								aria-hidden="true"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+								/>
+							</svg>
+							<!--
+            Icon when menu is open.
+
+            Menu open: "block", Menu closed: "hidden"
+          -->
+							<svg
+								class="hidden h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								aria-hidden="true"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M6 18L18 6M6 6l12 12"
+								/>
+							</svg>
+						</button>
+					</div>
+					<div
+						class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+					>
+						<div class="flex flex-shrink-0 items-center">
+							<img
+								class="h-8 w-auto hover:cursor-pointer"
+								src="./assets/logo.png"
+								onclick="window.location.href = './index.html'"
+								alt="Logo"
+							/>
+						</div>
+						<div class="hidden sm:ml-6 sm:block">
+							<div class="flex space-x-4">
+								<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+								<a
+									href="./index.html"
+									class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+									aria-current="page"
+									>Home</a
+								>
+								<a
+									href="./ProductsPage.html"
+									class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+									>Products</a
+								>
+								<a
+									href="./CategoryPage.html"
+									class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+									>Category</a
+								>
+								<a
+									href="./AboutUs.html"
+									class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+									>About Us</a
+								>
+							</div>
+						</div>
+					</div>
+					<div
+						class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+					>
+						<button
+							type="button"
+							onclick="window.location.href = './Cart.html'"
+							class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+						>
+							<span class="absolute -inset-1.5"></span>
+							<span class="sr-only">View Cart</span>
+							<i
+								class="fas fa-shopping-cart px-2 py-2 rounded-full"
+							></i>
+						</button>
+
+						<!-- Profile dropdown -->
+						<div class="relative ml-3">
+							<div>
+								<button
+									type="button"
+									class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+									id="user-menu-button"
+									aria-expanded="false"
+									aria-haspopup="true"
+									onclick="expandProfile()"
+								>
+									<span class="absolute -inset-1.5"></span>
+									<span class="sr-only">Open user menu</span>
+									<img
+										class="h-8 w-8 rounded-full"
+										src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+										alt=""
+									/>
+								</button>
+							</div>
+
+							<!--
+            Dropdown menu, show/hide based on menu state.
+
+            Entering: "transition ease-out duration-100"
+              From: "transform opacity-0 scale-95"
+              To: "transform opacity-100 scale-100"
+            Leaving: "transition ease-in duration-75"
+              From: "transform opacity-100 scale-100"
+              To: "transform opacity-0 scale-95"
+          -->
+							<div
+								class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none scale-y-0"
+								role="menu"
+								aria-orientation="vertical"
+								aria-labelledby="user-menu-button"
+								tabindex="-1"
+								id="profileMenu"
+							>
+								<!-- Active: "bg-gray-100", Not Active: "" -->
+								<a
+									href="#"
+									class="block px-4 py-2 text-sm text-gray-700"
+									role="menuitem"
+									tabindex="-1"
+									id="user-menu-item-0"
+									>Your Profile</a
+								>
+								<a
+									href="#"
+									class="block px-4 py-2 text-sm text-gray-700"
+									role="menuitem"
+									tabindex="-1"
+									id="user-menu-item-1"
+									>Settings</a
+								>
+								<a
+									href="#"
+									class="block px-4 py-2 text-sm text-gray-700"
+									role="menuitem"
+									tabindex="-1"
+									id="user-menu-item-2"
+									>Sign out</a
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Mobile menu, show/hide based on menu state. -->
+			<div
+				class="sm:hidden overflow-hidden h-0"
+				id="mobile-menu"
+			>
+				<div class="space-y-1 px-2 pb-3 pt-2">
+					<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+					<a
+						href="./index.html"
+						class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+						aria-current="page"
+						>Home</a
+					>
+					<a
+						href="./ProductsPage.html"
+						class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+						>Products</a
+					>
+					<a
+						href="./CategoryPage.html"
+						class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+						>Category</a
+					>
+					<a
+						href="./AboutUs.html"
+						class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+						>About Us</a
+					>
+				</div>
+			</div>
+		</nav>
+		<!-- NAVBAR END -->
+
+		<!-- Scroll to Top Button -->
+		<div
+			onclick="topFunction()"
+			id="scrollbtn"
+			title="Go to top"
+			class="hidden fixed bottom-5 right-5 z-[10000]"
+		>
+			<button class="scroll-to-top-btn">
+				<svg
+					viewBox="0 0 384 512"
+					class="svgIcon"
+				>
+					<path
+						d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+					></path>
+				</svg>
+			</button>
+		</div>
+
+		<!-- Slider Section Start -->
+		<div class="w-full h-screen relative">
+			<div
+				class="swiper h-full fraction-slide-carousel swiper-container relative"
+			>
+				<div class="swiper-wrapper h-screen w-screen">
+					<!-- ITEM-1 -->
+					<div class="swiper-slide h-full w-full">
+						<div
+							class="flex flex-col justify-center items-center relative h-full w-full"
+						>
+							<div
+								class="flex flex-row justify-center items-center bg-slate-300 h-full w-full"
+							>
+								<section
+									class="w-[40%] flex items-center justify-center"
+								>
+									<div class="w-[80%]">
+										<h1
+											class="poetsen-one-regular text-4xl"
+										>
+											Comfortable Sofa with Great Comfort
+										</h1>
+										<p class="text-sm mt-3 text-justify">
+											Lorem ipsum dolor sit amet,
+											consectetur adipiscing elit, sed do
+											eiusmod tempor incididunt ut labore
+											et dolore magna aliqua minim veniam.
+										</p>
+										<button
+											class="flex items-center justify-center w-full px-4 py-4 text-sm font-bold leading-6 capitalize duration-100 transform border-2 rounded-sm cursor-pointer focus:ring-opacity-50 focus:outline-none sm:w-auto sm:px-6 border-text hover:shadow-lg hover:-translate-y-1 mt-5 border-2 border-black py-2 duration-300"
+										>
+											Shop Now
+										</button>
+									</div>
+								</section>
+
+								<section
+									class="w-[40%] flex items-center justify-center h-full"
+								>
+									<image
+										src="./assets/hero-section-sofa.png"
+										alt="Hero Section Sofa"
+										class="w-[70%] bg-transparent scale-75"
+										priority
+									/>
+								</section>
+							</div>
+						</div>
+					</div>
+
+					<!-- ITEM-2 -->
+					<div class="swiper-slide h-full w-full">
+						<div
+							class="flex flex-col justify-center items-center relative h-full w-full"
+						>
+							<div
+								class="flex flex-row justify-center items-center bg-slate-300 h-full w-full"
+							>
+								<section
+									class="w-[40%] flex items-center justify-center"
+								>
+									<div class="w-[80%]">
+										<h1
+											class="poetsen-one-regular text-4xl"
+										>
+											Comfortable Sofa with Great Comfort
+										</h1>
+										<p class="text-sm mt-3 text-justify">
+											Lorem ipsum dolor sit amet,
+											consectetur adipiscing elit, sed do
+											eiusmod tempor incididunt ut labore
+											et dolore magna aliqua minim veniam.
+										</p>
+										<button
+											class="flex items-center justify-center w-full px-4 py-4 text-sm font-bold leading-6 capitalize duration-100 transform border-2 rounded-sm cursor-pointer focus:ring-opacity-50 focus:outline-none sm:w-auto sm:px-6 border-text hover:shadow-lg hover:-translate-y-1 mt-5 border-2 border-black py-2 duration-300"
+										>
+											Shop Now
+										</button>
+									</div>
+								</section>
+
+								<section
+									class="w-[40%] flex items-center justify-center h-full"
+								>
+									<image
+										src="./assets/hero-section-sofa.png"
+										alt="Hero Section Sofa"
+										class="w-[70%] bg-transparent scale-75"
+										priority
+									/>
+								</section>
+							</div>
+						</div>
+					</div>
+
+					<!-- ITEM-3 -->
+					<div class="swiper-slide h-full">
+						<div
+							class="flex h-full flex-col justify-center items-center relative"
+						>
+							<div
+								class="flex flex-row justify-center items-center bg-slate-300 h-full w-full"
+							>
+								<section
+									class="w-[40%] flex items-center justify-center"
+								>
+									<div class="w-[80%]">
+										<h1
+											class="poetsen-one-regular text-4xl"
+										>
+											Comfortable Sofa with Great Comfort
+										</h1>
+										<p class="text-sm mt-3 text-justify">
+											Lorem ipsum dolor sit amet,
+											consectetur adipiscing elit, sed do
+											eiusmod tempor incididunt ut labore
+											et dolore magna aliqua minim veniam.
+										</p>
+										<button
+											class="flex items-center justify-center w-full px-4 py-4 text-sm font-bold leading-6 capitalize duration-100 transform border-2 rounded-sm cursor-pointer focus:ring-opacity-50 focus:outline-none sm:w-auto sm:px-6 border-text hover:shadow-lg hover:-translate-y-1 mt-5 border-2 border-black py-2 duration-300"
+										>
+											Shop Now
+										</button>
+									</div>
+								</section>
+
+								<section
+									class="w-[40%] flex items-center justify-center h-full"
+								>
+									<image
+										src="./assets/hero-section-sofa.png"
+										alt="Hero Section Sofa"
+										class="w-[70%] bg-transparent scale-75"
+										priority
+									/>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- CONTROLS -->
+				<div
+					class="flex items-center gap-8 lg:justify-start justify-center h-full border-2 border-black"
+				>
+					<button
+						id="slider-button-left"
+						class="swiper-button-prev after:content-none group !p-2 flex justify-center items-center w-8 h-8 transition-all duration-500 rounded-full !top-2/4 !-translate-y-1/2 !right-5 hover:bg-indigo-400 hover:text-white"
+						data-carousel-prev
+					>
+						<i class="fas fa-arrow-left"></i>
+					</button>
+					<button
+						id="slider-button-right"
+						class="swiper-button-next after:content-none group !p-2 flex justify-center items-center w-8 h-8 transition-all duration-500 rounded-full !top-2/4 !-translate-y-1/2 !right-5 hover:bg-indigo-400 hover:text-white"
+						data-carousel-next
+					>
+						<i class="fas fa-arrow-right"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Slider Section End -->
+
+		<!-- Shop By Category Section Start -->
+		<div
+			class="w-full h-full flex flex-col items-center justify-center mt-10"
+		>
+			<span
+				class="radio-canada-big text-2xl flex flex-col items-center justify-center gap-2 mt-10 mb-10"
+			>
+				Shop By Category
+				<hr class="w-1/2 h-[5px] rounded-md bg-black" />
+			</span>
+
+			<section
+				class="w-3/4 flex flex-wrap items-center justify-center md:justify-between gap-3 mt-3"
+			>
+				<div
+					class="shop-by-category-card poetsen-one-regular"
+					id="shop-by-category-card-1"
+				></div>
+				<div
+					class="shop-by-category-card poetsen-one-regular"
+					id="shop-by-category-card-2"
+				></div>
+				<div
+					class="shop-by-category-card poetsen-one-regular"
+					id="shop-by-category-card-3"
+				></div>
+				<div
+					class="shop-by-category-card poetsen-one-regular"
+					id="shop-by-category-card-4"
+				></div>
+			</section>
+		</div>
+
+		<!-- Shop By Category Section End -->
+
+		<!-- Latest Products Section Start -->
+		<div
+			class="w-full h-full flex flex-col items-center justify-center mt-10"
+		>
+			<span
+				class="radio-canada-big text-2xl flex flex-col items-center justify-center gap-2 mt-10 mb-10"
+			>
+				Latest Products
+				<hr class="w-1/2 h-[5px] rounded-md bg-black" />
+			</span>
+			<section
+				class="w-3/4 h-[300px] grid grid-cols-1 lg:grid-cols-4 sm:grid-cols-2 gap-3 mt-5 place-items-center"
+				id="latest-products-section"
+			></section>
+		</div>
+		<!-- Latest Products Section End -->
+
+		<!-- JAVASCRIPT FILES -->
+
+		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/pagedone@1.1.2/src/js/pagedone.js"></script>
+		<script
+			type="text/javascript"
+			src="./js/navbar.js"
+		></script>
+		<script
+			type="text/javascript"
+			src="./js/globals.js"
+		></script>
+		<script type="text/javascript">
+			var swiper = new Swiper(".fraction-slide-carousel", {
+				loop: true,
+				fraction: true,
+				navigation: {
+					nextEl: ".fraction-slide-carousel .swiper-button-next",
+					prevEl: ".fraction-slide-carousel .swiper-button-prev",
+				},
+				pagination: {
+					el: ".fraction-slide-carousel .swiper-pagination",
+					type: "fraction",
+					formatFractionCurrent: function (number) {
+						return number;
+					},
+				},
+			});
+		</script>
+
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> -->
+	</body>
+</html>
+
+<script type="text/javascript">
+	// imageSrc, imageAlt, price, productName
+
+	const AllProducts = [
+		{
+			imageSrc: "./assets/hero-section-sofa.png",
+			imageAlt: "Sofa",
+			productName: "Sofa",
+			price: 100,
+		},
+		{
+			imageSrc: "./assets/hero-section-sofa.png",
+			imageAlt: "Sofa",
+			productName: "Sofa",
+			price: 100,
+		},
+		{
+			imageSrc: "./assets/hero-section-sofa.png",
+			imageAlt: "Sofa",
+			productName: "Sofa",
+			price: 100,
+		},
+		{
+			imageSrc: "./assets/hero-section-sofa.png",
+			imageAlt: "Sofa",
+			productName: "Sofa",
+			price: 100,
+		},
+	];
+
+	AllProducts.forEach((product) => {
+		const card = createProductCard(product);
+		document.getElementById("latest-products-section").innerHTML += card;
+	});
+</script>

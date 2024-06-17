@@ -1,0 +1,91 @@
+.shop-by-category-card {
+	position: relative;
+	width: 220px;
+	height: 220px;
+	background: #cbd5e1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 25px;
+	font-weight: bold;
+	border-radius: 15px;
+	cursor: pointer;
+	border: 2px solid rgb(145, 156, 170);
+}
+
+.shop-by-category-card::before,
+.shop-by-category-card::after {
+	position: absolute;
+	content: "";
+	width: 20%;
+	height: 20%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 25px;
+	font-weight: bold;
+	background: rgba(255, 255, 255, 0.2);
+	transition: all 0.5s;
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+}
+
+.shop-by-category-card::before {
+	top: 0;
+	right: 0;
+	border-radius: 0 15px 0 100%;
+}
+
+.shop-by-category-card::after {
+	bottom: 0;
+	left: 0;
+	border-radius: 0 100% 0 15px;
+}
+
+.shop-by-category-card:hover::before,
+.shop-by-category-card:hover:after {
+	width: 100%;
+	height: 100%;
+	border-radius: 15px;
+	transition: all 0.5s;
+}
+
+#shop-by-category-card-1:hover:after {
+	content: "Furniture";
+}
+
+#shop-by-category-card-1 {
+	background-image: url("../assets/furnitures-category.png");
+	background-size: cover;
+	background-position: center;
+}
+
+#shop-by-category-card-2:hover:after {
+	content: "Kitchenwares";
+}
+
+#shop-by-category-card-2 {
+	background-image: url("../assets/kitchenwares-category.png");
+	background-size: cover;
+	background-position: center;
+}
+
+#shop-by-category-card-3:hover:after {
+	content: "Electronics";
+}
+
+#shop-by-category-card-3 {
+	background-image: url("../assets/electronics-category.png");
+	background-size: cover;
+	background-position: center;
+}
+
+#shop-by-category-card-4:hover:after {
+	content: "Explore";
+}
+
+#shop-by-category-card-4 {
+	background-image: url("../assets/misc-category.jpg");
+	background-size: cover;
+	background-position: center;
+}

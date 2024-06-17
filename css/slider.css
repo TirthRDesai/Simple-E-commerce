@@ -1,0 +1,68 @@
+.swiper-wrapper {
+	width: 100%;
+	height: max-content !important;
+	padding-bottom: 64px !important;
+	-webkit-transition-timing-function: linear !important;
+	transition-timing-function: linear !important;
+	position: relative;
+}
+.swiper-pagination-current {
+	color: #111827 !important;
+}
+.swiper-pagination-total {
+	color: #9ca3af;
+}
+
+.carousel-next-btn {
+	display: flex;
+	color: #c2ffe9;
+	background-color: #00e692;
+	padding: 10px 16px;
+	border-radius: 20px;
+	transition: all 0.3s ease;
+	font-weight: bold;
+	cursor: pointer;
+	align-items: center;
+	font-size: 14px;
+}
+
+.carousel-next-btn > .arrow {
+	width: 6px;
+	height: 6px;
+	border-right: 2px solid #c2ffe9;
+	border-bottom: 2px solid #c2ffe9;
+	position: relative;
+	transform: rotate(-45deg);
+	margin: 0 6px;
+	transition: all 0.3s ease;
+}
+
+.carousel-next-btn > .arrow::before {
+	display: block;
+	background-color: currentColor;
+	width: 3px;
+	transform-origin: bottom right;
+	height: 2px;
+	position: absolute;
+	opacity: 0;
+	bottom: calc(-2px / 2);
+	transform: rotate(45deg);
+	transition: all 0.3s ease;
+	content: "";
+	right: 0;
+}
+
+.carousel-next-btn:hover > .arrow {
+	transform: rotate(-45deg) translate(4px, 4px);
+	border-color: text-hover-color;
+}
+
+.carousel-next-btn:hover > .arrow::before {
+	opacity: 1;
+	width: 8px;
+}
+
+.carousel-next-btn:hover {
+	background-color: #017a4f;
+	color: #fff;
+}
