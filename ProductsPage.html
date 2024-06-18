@@ -38,7 +38,7 @@
 
 		<script src="https://cdn.tailwindcss.com"></script>
 	</head>
-	<body>
+	<body class="bg-[#ede4db]">
 		<!-- Navbar Start -->
 		<nav class="bg-gray-800 h-fit w-full fixed top-0">
 			<div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -256,24 +256,33 @@
 		<!-- Navbar End -->
 
 		<!-- Scroll to Top Button Start -->
-		<button
+		<div
 			onclick="topFunction()"
 			id="scrollbtn"
 			title="Go to top"
-			class="hidden fixed bottom-5 right-5 bg-gray-800 text-white rounded-full px-2 py-1"
+			class="hidden fixed bottom-5 right-5 z-[10000]"
 		>
-			<i class="fas fa-arrow-up"></i>
-		</button>
+			<button class="scroll-to-top-btn">
+				<svg
+					viewBox="0 0 384 512"
+					class="svgIcon"
+				>
+					<path
+						d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+					></path>
+				</svg>
+			</button>
+		</div>
 		<!-- Scroll to Top Button End -->
 
 		<!-- Main Section Start -->
 
 		<main
-			class="w-full h-full mt-10 gap-8 px-2 flex flex-row items-center justify-between"
+			class="w-full h-full mt-10 px-2 flex flex-col lg:flex-row items-start justify-around"
 		>
 			<!-- Filters Section Start -->
 			<section
-				class="h-full w-1/4 flex flex-col justify-start items-center"
+				class="h-full w-full lg:w-1/4 flex flex-col justify-start items-center"
 				id="filter-section"
 			>
 				<!-- Filter by Categories -->
@@ -291,33 +300,9 @@
 						class="w-full m-4 flex flex-col items-center justify-start"
 					>
 						<ul
-							class="flex w-full flex-col items-center justify-equally text-base font-semibold"
-						>
-							<li
-								class="categories-filter-selector"
-								id="categories-filter-selector-category-1"
-							>
-								Category-1
-							</li>
-							<li
-								class="categories-filter-selector"
-								id="categories-filter-selector-category-2"
-							>
-								Category-2
-							</li>
-							<li
-								class="categories-filter-selector"
-								id="categories-filter-selector-category-3"
-							>
-								Category-3
-							</li>
-							<li
-								class="categories-filter-selector"
-								id="categories-filter-selector-category-4"
-							>
-								Category-4
-							</li>
-						</ul>
+							class="flex w-full flex-col items-center justify-evenly text-base font-semibold"
+							id="categories-selector-container"
+						></ul>
 					</div>
 				</div>
 
@@ -348,11 +333,10 @@
 									type="range"
 									value="0"
 									min="0"
-									max="10000"
+									max="1500"
 									step="100"
 									class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 opacity-80 hover:opacity-100"
 									onchange="updatePriceRange(this)"
-									oninput="updatePriceRange(this)"
 								/>
 								<span
 									class="absolute -bottom-10 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 px-3 rounded-lg border border-gray-300 bg-white py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out group-hover:scale-100"
@@ -376,7 +360,7 @@
 								<span
 									class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6"
 								>
-									$10000+
+									$1500+
 								</span>
 							</div>
 
@@ -391,18 +375,17 @@
 									data-status="max"
 									type="range"
 									min="0"
-									value="10000"
-									max="10000"
+									value="1500"
+									max="1500"
 									step="100"
 									class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 opacity-80 hover:opacity-100"
 									onchange="updatePriceRange(this)"
-									oninput="updatePriceRange(this)"
 								/>
 								<span
 									class="absolute -bottom-10 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 px-3 rounded-lg border border-gray-300 bg-white py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out group-hover:scale-100"
 									id="filtered-price-max-value"
 								>
-									10000
+									1500
 								</span>
 								<span
 									class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6"
@@ -420,7 +403,7 @@
 								<span
 									class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6"
 								>
-									$10000+
+									$1500+
 								</span>
 							</div>
 						</div>
@@ -430,8 +413,26 @@
 			<!-- Filters Section End -->
 
 			<!-- Product List Section Start -->
+			<div
+				id="product-card-list-container-parent"
+				class="w-full lg:w-[70%] mt-12 flex flex-col items-center justify-center gap-10"
+			>
+				<section
+					class="w-full gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+					id="product-cards-list-container"
+				></section>
 
-			<section class="h-full w-3/4 bg-green-500"></section>
+				<button
+					class="loadmorebtn hidden"
+					id="product-page-load-more-btn"
+					onclick="loadMore()"
+				>
+					<span class="loadmorebtn_lg">
+						<span class="loadmorebtn_sl"></span>
+						<span class="loadmorebtn_text">Load More</span>
+					</span>
+				</button>
+			</div>
 			<!-- Product List Section End -->
 		</main>
 
@@ -439,7 +440,7 @@
 
 		<!-- Footer Section Start -->
 		<footer
-			class="w-full dark:bg-gray-900 mt-24 border-t-2 border-t-gray-400"
+			class="w-full dark:bg-gray-900 mt-24 border-t-2 border-t-gray-400 bg-[#f8f8f8]"
 		>
 			<div class="mx-auto w-full max-w-screen-xl gap-4">
 				<div
