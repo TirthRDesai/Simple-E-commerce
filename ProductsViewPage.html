@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Product View</title>
+
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+			integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+		<link
+			rel="stylesheet"
+			href="./css/navbar.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="./css/globals.css"
+		/>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	</head>
+	<body class="bg-[#ede4db]">
+		<!-- Navbar Start -->
+		<nav class="bg-gray-800 h-fit w-full fixed top-0">
+			<div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+				<div
+					class="relative flex h-16 items-center justify-between"
+					id="mobileMenuBox"
+				>
+					<div
+						class="absolute inset-y-0 left-0 flex items-center sm:hidden"
+					>
+						<!-- Mobile menu button-->
+						<button
+							type="button"
+							class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+							aria-controls="mobile-menu"
+							aria-expanded="false"
+							onclick="expandNavbar()"
+						>
+							<span class="absolute -inset-0.5"></span>
+							<span class="sr-only">Open main menu</span>
+							<!--
+            Icon when menu is closed.
+
+            Menu open: "hidden", Menu closed: "block"
+          -->
+							<svg
+								class="block h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								aria-hidden="true"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+								/>
+							</svg>
+							<!--
+            Icon when menu is open.
+
+            Menu open: "block", Menu closed: "hidden"
+          -->
+							<svg
+								class="hidden h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								aria-hidden="true"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M6 18L18 6M6 6l12 12"
+								/>
+							</svg>
+						</button>
+					</div>
+					<div
+						class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+					>
+						<div class="flex flex-shrink-0 items-center">
+							<img
+								class="h-8 w-auto hover:cursor-pointer"
+								src="./assets/logo.png"
+								onclick="window.location.href = './index.html'"
+								alt="Logo"
+							/>
+						</div>
+						<div class="hidden sm:ml-6 sm:block">
+							<div class="flex space-x-4">
+								<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+								<a
+									href="./index.html"
+									class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+									aria-current="page"
+									>Home</a
+								>
+								<a
+									href="./ProductsPage.html"
+									class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+									>Products</a
+								>
+								<a
+									href="./CategoryPage.html"
+									class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+									>Category</a
+								>
+								<a
+									href="./AboutUs.html"
+									class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+									>About Us</a
+								>
+							</div>
+						</div>
+					</div>
+					<div
+						class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+					>
+						<button
+							type="button"
+							onclick="window.location.href = './Cart.html'"
+							class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+						>
+							<span class="absolute -inset-1.5"></span>
+							<span class="sr-only">View Cart</span>
+							<i
+								class="fas fa-shopping-cart px-2 py-2 rounded-full"
+							></i>
+						</button>
+
+						<!-- Profile dropdown -->
+						<div class="relative ml-3">
+							<div>
+								<button
+									type="button"
+									class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+									id="user-menu-button"
+									aria-expanded="false"
+									aria-haspopup="true"
+									onclick="expandProfile()"
+								>
+									<span class="absolute -inset-1.5"></span>
+									<span class="sr-only">Open user menu</span>
+									<img
+										class="h-8 w-8 rounded-full"
+										src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+										alt=""
+									/>
+								</button>
+							</div>
+
+							<!--
+            Dropdown menu, show/hide based on menu state.
+
+            Entering: "transition ease-out duration-100"
+              From: "transform opacity-0 scale-95"
+              To: "transform opacity-100 scale-100"
+            Leaving: "transition ease-in duration-75"
+              From: "transform opacity-100 scale-100"
+              To: "transform opacity-0 scale-95"
+          -->
+							<div
+								class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none scale-y-0"
+								role="menu"
+								aria-orientation="vertical"
+								aria-labelledby="user-menu-button"
+								tabindex="-1"
+								id="profileMenu"
+							>
+								<!-- Active: "bg-gray-100", Not Active: "" -->
+								<a
+									href="#"
+									class="block px-4 py-2 text-sm text-gray-700"
+									role="menuitem"
+									tabindex="-1"
+									id="user-menu-item-0"
+									>Your Profile</a
+								>
+								<a
+									href="#"
+									class="block px-4 py-2 text-sm text-gray-700"
+									role="menuitem"
+									tabindex="-1"
+									id="user-menu-item-1"
+									>Settings</a
+								>
+								<a
+									href="#"
+									class="block px-4 py-2 text-sm text-gray-700"
+									role="menuitem"
+									tabindex="-1"
+									id="user-menu-item-2"
+									>Sign out</a
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Mobile menu, show/hide based on menu state. -->
+			<div
+				class="sm:hidden overflow-hidden h-0"
+				id="mobile-menu"
+			>
+				<div class="space-y-1 px-2 pb-3 pt-2">
+					<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+					<a
+						href="./index.html"
+						class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+						aria-current="page"
+						>Home</a
+					>
+					<a
+						href="./ProductsPage.html"
+						class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+						>Products</a
+					>
+					<a
+						href="./CategoryPage.html"
+						class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+						>Category</a
+					>
+					<a
+						href="./AboutUs.html"
+						class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+						>About Us</a
+					>
+				</div>
+			</div>
+		</nav>
+		<!-- Navbar End -->
+
+		<!-- Scroll to Top Button Start -->
+		<div
+			onclick="topFunction()"
+			id="scrollbtn"
+			title="Go to top"
+			class="hidden fixed bottom-5 right-5 z-[10000]"
+		>
+			<button class="scroll-to-top-btn">
+				<svg
+					viewBox="0 0 384 512"
+					class="svgIcon"
+				>
+					<path
+						d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+					></path>
+				</svg>
+			</button>
+		</div>
+		<!-- Scroll to Top Button End -->
+
+		<!-- Products View Start -->
+		<section
+			class="flex flex-col md:flex-row pt-[80px] max-w-screen border-2 h-full gap-2 justify-evenly items-stretch"
+		>
+			<div
+				class="product-view-img-container w-full lg:w-auto mx-3 mx-3 rounded-lg flex items-center"
+			>
+				<img
+					onerror="this.src='./assets/Products/no-image-found.png'"
+					src="./assets/Products/no-image-found.png"
+					alt="Product Image"
+					class="product-view-img object-fill aspect-[4/3] h-[400px] shadow-xl border-2 border-gray-300 rounded-lg"
+					id="productViewImg"
+				/>
+			</div>
+			<main
+				class="inter product-details-container pt-2 flex flex-col w-full px-4 justify-evenly items-stretch"
+			>
+				<p
+					class="font-medium text-base text-indigo-600 mb-4 h-auto"
+					id="category"
+				></p>
+				<h2
+					class="mb-2 font-manrope font-bold text-lg text-gray-900 h-auto"
+					id="productName"
+				></h2>
+				<div
+					class="flex flex-col sm:flex-row sm:items-center mb-6 h-auto"
+				>
+					<h6
+						class="font-manrope font-semibold text-2xl leading-9 text-gray-900 pr-5 sm:border-r border-gray-200 mr-5"
+						id="productPrice"
+					></h6>
+					<div class="flex items-center gap-2">
+						<div
+							class="flex items-center gap-1"
+							id="ratingStars"
+						>
+							<svg
+								width="20"
+								height="20"
+								viewBox="0 0 20 20"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<g clip-path="url(#clip0_12029_1640)">
+									<path
+										d="M9.10326 2.31699C9.47008 1.57374 10.5299 1.57374 10.8967 2.31699L12.7063 5.98347C12.8519 6.27862 13.1335 6.48319 13.4592 6.53051L17.5054 7.11846C18.3256 7.23765 18.6531 8.24562 18.0596 8.82416L15.1318 11.6781C14.8961 11.9079 14.7885 12.2389 14.8442 12.5632L15.5353 16.5931C15.6754 17.41 14.818 18.033 14.0844 17.6473L10.4653 15.7446C10.174 15.5915 9.82598 15.5915 9.53466 15.7446L5.91562 17.6473C5.18199 18.033 4.32456 17.41 4.46467 16.5931L5.15585 12.5632C5.21148 12.2389 5.10393 11.9079 4.86825 11.6781L1.94038 8.82416C1.34687 8.24562 1.67438 7.23765 2.4946 7.11846L6.54081 6.53051C6.86652 6.48319 7.14808 6.27862 7.29374 5.98347L9.10326 2.31699Z"
+										fill="#FBBF24"
+									/>
+								</g>
+								<defs>
+									<clipPath id="clip0_12029_1640">
+										<rect
+											width="20"
+											height="20"
+											fill="white"
+										/>
+									</clipPath>
+								</defs>
+							</svg>
+							<svg
+								width="20"
+								height="20"
+								viewBox="0 0 20 20"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<g clip-path="url(#clip0_12029_1640)">
+									<path
+										d="M9.10326 2.31699C9.47008 1.57374 10.5299 1.57374 10.8967 2.31699L12.7063 5.98347C12.8519 6.27862 13.1335 6.48319 13.4592 6.53051L17.5054 7.11846C18.3256 7.23765 18.6531 8.24562 18.0596 8.82416L15.1318 11.6781C14.8961 11.9079 14.7885 12.2389 14.8442 12.5632L15.5353 16.5931C15.6754 17.41 14.818 18.033 14.0844 17.6473L10.4653 15.7446C10.174 15.5915 9.82598 15.5915 9.53466 15.7446L5.91562 17.6473C5.18199 18.033 4.32456 17.41 4.46467 16.5931L5.15585 12.5632C5.21148 12.2389 5.10393 11.9079 4.86825 11.6781L1.94038 8.82416C1.34687 8.24562 1.67438 7.23765 2.4946 7.11846L6.54081 6.53051C6.86652 6.48319 7.14808 6.27862 7.29374 5.98347L9.10326 2.31699Z"
+										fill="#FBBF24"
+									/>
+								</g>
+								<defs>
+									<clipPath id="clip0_12029_1640">
+										<rect
+											width="20"
+											height="20"
+											fill="white"
+										/>
+									</clipPath>
+								</defs>
+							</svg>
+							<svg
+								width="20"
+								height="20"
+								viewBox="0 0 20 20"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<g clip-path="url(#clip0_12029_1640)">
+									<path
+										d="M9.10326 2.31699C9.47008 1.57374 10.5299 1.57374 10.8967 2.31699L12.7063 5.98347C12.8519 6.27862 13.1335 6.48319 13.4592 6.53051L17.5054 7.11846C18.3256 7.23765 18.6531 8.24562 18.0596 8.82416L15.1318 11.6781C14.8961 11.9079 14.7885 12.2389 14.8442 12.5632L15.5353 16.5931C15.6754 17.41 14.818 18.033 14.0844 17.6473L10.4653 15.7446C10.174 15.5915 9.82598 15.5915 9.53466 15.7446L5.91562 17.6473C5.18199 18.033 4.32456 17.41 4.46467 16.5931L5.15585 12.5632C5.21148 12.2389 5.10393 11.9079 4.86825 11.6781L1.94038 8.82416C1.34687 8.24562 1.67438 7.23765 2.4946 7.11846L6.54081 6.53051C6.86652 6.48319 7.14808 6.27862 7.29374 5.98347L9.10326 2.31699Z"
+										fill="#FBBF24"
+									/>
+								</g>
+								<defs>
+									<clipPath id="clip0_12029_1640">
+										<rect
+											width="20"
+											height="20"
+											fill="white"
+										/>
+									</clipPath>
+								</defs>
+							</svg>
+							<svg
+								width="20"
+								height="20"
+								viewBox="0 0 20 20"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<g clip-path="url(#clip0_12029_1640)">
+									<path
+										d="M9.10326 2.31699C9.47008 1.57374 10.5299 1.57374 10.8967 2.31699L12.7063 5.98347C12.8519 6.27862 13.1335 6.48319 13.4592 6.53051L17.5054 7.11846C18.3256 7.23765 18.6531 8.24562 18.0596 8.82416L15.1318 11.6781C14.8961 11.9079 14.7885 12.2389 14.8442 12.5632L15.5353 16.5931C15.6754 17.41 14.818 18.033 14.0844 17.6473L10.4653 15.7446C10.174 15.5915 9.82598 15.5915 9.53466 15.7446L5.91562 17.6473C5.18199 18.033 4.32456 17.41 4.46467 16.5931L5.15585 12.5632C5.21148 12.2389 5.10393 11.9079 4.86825 11.6781L1.94038 8.82416C1.34687 8.24562 1.67438 7.23765 2.4946 7.11846L6.54081 6.53051C6.86652 6.48319 7.14808 6.27862 7.29374 5.98347L9.10326 2.31699Z"
+										fill="#FBBF24"
+									/>
+								</g>
+								<defs>
+									<clipPath id="clip0_12029_1640">
+										<rect
+											width="20"
+											height="20"
+											fill="white"
+										/>
+									</clipPath>
+								</defs>
+							</svg>
+							<svg
+								width="20"
+								height="20"
+								viewBox="0 0 20 20"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<g clip-path="url(#clip0_8480_66029)">
+									<path
+										d="M9.10326 2.31699C9.47008 1.57374 10.5299 1.57374 10.8967 2.31699L12.7063 5.98347C12.8519 6.27862 13.1335 6.48319 13.4592 6.53051L17.5054 7.11846C18.3256 7.23765 18.6531 8.24562 18.0596 8.82416L15.1318 11.6781C14.8961 11.9079 14.7885 12.2389 14.8442 12.5632L15.5353 16.5931C15.6754 17.41 14.818 18.033 14.0844 17.6473L10.4653 15.7446C10.174 15.5915 9.82598 15.5915 9.53466 15.7446L5.91562 17.6473C5.18199 18.033 4.32456 17.41 4.46467 16.5931L5.15585 12.5632C5.21148 12.2389 5.10393 11.9079 4.86825 11.6781L1.94038 8.82416C1.34687 8.24562 1.67438 7.23765 2.4946 7.11846L6.54081 6.53051C6.86652 6.48319 7.14808 6.27862 7.29374 5.98347L9.10326 2.31699Z"
+										fill="#F3F4F6"
+									/>
+								</g>
+								<defs>
+									<clipPath id="clip0_8480_66029">
+										<rect
+											width="20"
+											height="20"
+											fill="white"
+										/>
+									</clipPath>
+								</defs>
+							</svg>
+						</div>
+						<span
+							class="pl-2 font-normal leading-7 text-gray-500 text-sm"
+							id="numberOfReviews"
+						></span>
+					</div>
+				</div>
+				<p
+					class="text-gray-500 text-justify text-sm font-normal mb-8 h-full line-clamp-7"
+					id="productDescription"
+				></p>
+				<button
+					class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg"
+					id="addToCartBtn"
+				>
+					Add to Cart
+				</button>
+			</main>
+		</section>
+		<!-- Products View End -->
+
+		<!-- Related Products Start -->
+		<section
+			class="flex flex-col w-full h-full gap-2 justify-evenly items-center"
+		>
+			<span
+				class="radio-canada-big text-2xl flex flex-col items-center justify-center gap-2 mt-20 mb-10"
+			>
+				Related Products
+				<hr class="w-1/2 h-[5px] rounded-md bg-black" />
+			</span>
+			<main
+				class="w-full gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 justify-evenly items-center"
+				id="relatedProducts"
+			></main>
+		</section>
+		<!-- Related Products End -->
+
+		<!-- Scripts -->
+		<script
+			type="text/javascript"
+			src="./js/navbar.js"
+		></script>
+		<script
+			type="text/javascript"
+			src="./js/globals.js"
+		></script>
+		<script
+			type="text/javascript"
+			src="./js/product-view-page.js"
+		></script>
+	</body>
+</html>

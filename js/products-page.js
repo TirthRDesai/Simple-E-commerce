@@ -1,3 +1,4 @@
+
 var products = [];
 
 var selectedProducts = watch(products, (filteredProducts) => {
@@ -47,7 +48,6 @@ var filters = watch({
     selectedProducts.value = result;
 });
 
-
 var AllCategories = watch([], (categories) => {
     setCategoriesSection(categories)
 });
@@ -91,34 +91,23 @@ function updatePriceRange(e) {
 }
 
 window.onload = async () => {
-    if (localStorage.getItem('products') == null) {
-        const productsDataResponseCsv = await fetch("https://query.data.world/s/ha67ewqa44twyiq3a7tzxwtrgcwfiz?dws=00000")
-        const productsDataCsv = await productsDataResponseCsv.text();
+    const [innerProducts, innerCategories] = await window.fetchProductsData();
+    products = innerProducts;
+    setProductCards(products, 0, 12);
 
-
-        const uncleanedProducts = csvJson(productsDataCsv);
-
-        const cleanedProducts = uncleanedProducts.map((product) => {
-            const seperatedCategories = cleanCategories(product.category)
-
-            return {
-                ...product,
-                category: seperatedCategories,
-            }
-        });
-
-        localStorage.setItem('products', JSON.stringify(cleanedProducts));
-        products = cleanedProducts
-    } else {
-        products = JSON.parse(localStorage.getItem('products'));
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString)
+    var category_param = urlParams.get('category')
+    if (category_param != null) {
+        filters.value = {
+            ...filters.value,
+            categories: [category_param]
+        }
     }
 
-    selectedProducts.value = products
-
-    AllCategories.value = products.map((product) => product.category).flat().filter((value, index, self) => self.indexOf(value) === index);
+    AllCategories.value = innerCategories;
 
 }
-
 
 function csvJson(csv) {
     // Split the CSV data by new lines to get each row
@@ -181,7 +170,7 @@ function makeProductCard(productData) {
         img_link
     } = productData
 
-
+    const url = `ProductsViewPage.html?product_id=${product_id}`
 
 
     return `
@@ -202,13 +191,14 @@ function makeProductCard(productData) {
 						class="w-full text-base radio-canada-big product-card-details-section pt-4 flex flex-col gap-2"
 					>
 						<span
-							class="product-card-category font-bold text-lg"
+							class="product-card-category font-bold text-lg h-[]"
 						>
                             ${category[0]}
 						</span>
 
 						<span
-							class="product-card-product-name text-sm cursor-pointer hover:text-red-500 transition-all duration-500 line-clamp-2"
+							class="product-card-product-name text-sm cursor-pointer hover:text-red-500 transition-all duration-500 line-clamp-2 h-10"
+                            onclick="window.location.href='${url}'"
 						>
                         ${product_name}
 						</span>
@@ -224,7 +214,7 @@ function makeProductCard(productData) {
 						>
 							<button
 								class="bg-gray-800 text-white rounded-lg py-2 px-4 hover:bg-gray-700 transition-all duration-300 text-sm font-semibold nunito-sans"
-                                onclick="addToCart(${productData})"
+                                onclick="window.addToCart('${product_id}')"
 							>
 								Add to Cart
 							</button>
@@ -233,6 +223,7 @@ function makeProductCard(productData) {
 
 							<button
 								class="bg-gray-800 text-white rounded-lg py-2 px-4 hover:bg-gray-700 transition-all duration-300 text-sm font-semibold nunito-sans"
+                                onclick="window.location.href='${url}'"
 							>
 								View Product
 							</button>
@@ -282,7 +273,7 @@ function setProductCards(productData, start, end) {
     document.getElementById("product-page-load-more-btn").setAttribute('data-end', end)
 
     if (end >= productData.length) {
-        document.getElementById('product-load-more-btn').classList.add('hidden');
+        document.getElementById('product-page-load-more-btn').classList.add('hidden');
     } else {
         document.getElementById('product-page-load-more-btn').classList.remove('hidden');
     }
@@ -299,9 +290,36 @@ function loadMore() {
 }
 
 function setCategoriesSection(categories) {
+    let max = 5;
     let output = ``;
-    for (let i = 0; i < 5; i++) {
-        const category = categories[getRandomInt(0, categories.length - 1)];
+
+    const selectedCategories = [];
+
+    if (filters.value.categories.length > 0) {
+        output += `
+        <li
+            class="categories-filter-selector selected-category-filter"
+            id="categories-filter-selector-category-all"
+            onclick="this.classList.toggle('selected-category-filter');
+            updateCategory('')"
+            data-category="${filters.value.categories[0]}"
+        >
+            ${filters.value.categories[0]}
+        </li>`
+        max -= 1;
+    }
+
+    for (let i = 0; i < max; i++) {
+        const randomCategory = categories[getRandomInt(0, categories.length - 1)];
+        selectedCategories.push(randomCategory);
+    }
+
+    console.log(selectedCategories)
+
+
+
+    for (let i = 0; i < selectedCategories.length; i++) {
+        const category = selectedCategories[i];
         output += `
         <li
             class="categories-filter-selector"

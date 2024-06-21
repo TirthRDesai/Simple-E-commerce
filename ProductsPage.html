@@ -37,6 +37,7 @@
 		/>
 
 		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	</head>
 	<body class="bg-[#ede4db]">
 		<!-- Navbar Start -->
@@ -297,13 +298,18 @@
 						<hr class="w-1/2 h-[5px] rounded-md bg-black" />
 					</span>
 					<div
-						class="w-full m-4 flex flex-col items-center justify-start"
+						class="w-full m-4 flex flex-col items-center justify-start gap-2"
 					>
 						<ul
 							class="flex w-full flex-col items-center justify-evenly text-base font-semibold"
 							id="categories-selector-container"
 						></ul>
 					</div>
+					<span
+						class="text-base pb-4 font-bold w-full text-center px-4 text-blue-700 cursor-pointer hover:underline"
+						onclick="window.location.href='./CategoryPage.html'"
+						>All Categories➜</span
+					>
 				</div>
 
 				<!-- Filter by Price Range -->

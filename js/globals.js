@@ -14,6 +14,36 @@ function watch(initialValue, callback) {
 
 }
 
+async function fetchProductsData() {
+    let innerProducts = [];
+    let innerCategories = [];
+
+    if (localStorage.getItem('products') == null) {
+        const productsDataResponseCsv = await fetch("https://query.data.world/s/ha67ewqa44twyiq3a7tzxwtrgcwfiz?dws=00000")
+        const productsDataCsv = await productsDataResponseCsv.text();
+
+
+        const uncleanedProducts = csvJson(productsDataCsv);
+
+        const cleanedProducts = uncleanedProducts.map((product) => {
+            const seperatedCategories = cleanCategories(product.category)
+
+            return {
+                ...product,
+                category: seperatedCategories,
+            }
+        });
+
+        localStorage.setItem('products', JSON.stringify(cleanedProducts));
+        innerProducts = cleanedProducts
+    } else {
+        innerProducts = JSON.parse(localStorage.getItem('products'));
+    }
+
+    innerCategories = innerProducts.map((product) => product.category).flat().filter((value, index, self) => self.indexOf(value) === index);
+
+    return [innerProducts, innerCategories];
+}
 
 function createProductCard(productData) {
     let { productId, imageSrc, productDescription, price, productName } = productData;
@@ -53,16 +83,36 @@ function createProductCard(productData) {
 }
 
 
-function addToCart(productData) {
-    console.log(productData);
-}
+function addToCart(product_id) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "bottom-end",
+        showConfirmButton: false,
+        timer: 3000
+    });
+    const cart = localStorage.getItem('cart');
 
-function addToLikedProducts(productData) {
-    console.log(productData);
-}
+    if (cart === null) {
+        localStorage.setItem('cart', JSON.stringify([product_id]));
+    } else {
+        const cartArray = JSON.parse(cart);
+        if (cartArray.includes(product_id) == false) {
+            cartArray.push(product_id);
+        } else {
+            Toast.fire({
+                title: "Product Already in Cart",
+                icon: "warning",
+            });
+            return;
+        }
+        localStorage.setItem('cart', JSON.stringify(cartArray));
+    }
 
-function productNameHovered(productName) {
-    console.log(productName);
+
+    Toast.fire({
+        title: "Product Added to Cart",
+        icon: "success",
+    });
 }
 
 window.createProductCard = createProductCard;
@@ -70,3 +120,4 @@ window.addToCart = addToCart;
 window.addToLikedProducts = addToLikedProducts;
 window.productNameHovered = productNameHovered;
 window.watch = watch;
+window.fetchProductsData = fetchProductsData;
