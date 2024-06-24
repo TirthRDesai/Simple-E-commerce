@@ -117,7 +117,5 @@ function addToCart(product_id) {
 
 window.createProductCard = createProductCard;
 window.addToCart = addToCart;
-window.addToLikedProducts = addToLikedProducts;
-window.productNameHovered = productNameHovered;
 window.watch = watch;
 window.fetchProductsData = fetchProductsData;

@@ -6,7 +6,7 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
-		<title>Category</title>
+		<title>Your Cart</title>
 
 		<link
 			rel="stylesheet"
@@ -19,6 +19,10 @@
 		<link
 			rel="stylesheet"
 			href="./css/navbar.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="./css/globals.css"
 		/>
 
 		<script src="https://cdn.tailwindcss.com"></script>
@@ -238,18 +242,207 @@
 			</div>
 		</nav>
 
-		<button
+		<div
 			onclick="topFunction()"
 			id="scrollbtn"
 			title="Go to top"
-			class="hidden fixed bottom-5 right-5 bg-gray-800 text-white rounded-full px-2 py-1"
+			class="hidden fixed bottom-5 right-5 z-[10000]"
 		>
-			<i class="fas fa-arrow-up"></i>
-		</button>
+			<button class="scroll-to-top-btn">
+				<svg
+					viewBox="0 0 384 512"
+					class="svgIcon"
+				>
+					<path
+						d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+					></path>
+				</svg>
+			</button>
+		</div>
+
+		<section
+			class="bg-[#f8f8f8] py-10 antialiased dark:bg-gray-900 md:py-16"
+		>
+			<div class="mx-auto max-w-screen-xl px-4 2xl:px-0 pt-8">
+				<h2
+					class="radio-canada-big font-semibold text-gray-900 dark:text-white sm:text-2xl"
+				>
+					Your Cart
+				</h2>
+
+				<div
+					class="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8"
+				>
+					<div
+						class="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl"
+					>
+						<div
+							class="space-y-6"
+							id="cartItemsList"
+						></div>
+					</div>
+
+					<div
+						class="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full"
+					>
+						<div
+							class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6"
+						>
+							<p
+								class="text-xl font-semibold text-gray-900 dark:text-white"
+							>
+								Order summary
+							</p>
+
+							<div class="space-y-4">
+								<div class="space-y-2">
+									<dl
+										class="flex items-center justify-between gap-4"
+									>
+										<dt
+											class="text-base font-normal text-gray-500 dark:text-gray-400"
+										>
+											Original price
+										</dt>
+										<dd
+											id="originalPrice"
+											class="text-base font-medium text-gray-900 dark:text-white"
+										>
+											$0.00
+										</dd>
+									</dl>
+
+									<dl
+										class="flex items-center justify-between gap-4"
+									>
+										<dt
+											class="text-base font-normal text-gray-500 dark:text-gray-400"
+										>
+											Delivery Fee
+										</dt>
+										<dd
+											id="deliveryFee"
+											class="text-base font-medium text-gray-900 dark:text-white"
+										>
+											$0.00
+										</dd>
+									</dl>
+
+									<dl
+										class="flex items-center justify-between gap-4"
+									>
+										<dt
+											class="text-base font-normal text-gray-500 dark:text-gray-400"
+										>
+											Tax (10%)
+										</dt>
+										<dd
+											id="tax"
+											class="text-base font-medium text-gray-900 dark:text-white"
+										>
+											$0.00
+										</dd>
+									</dl>
+								</div>
+
+								<dl
+									class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700"
+								>
+									<dt
+										class="text-base font-bold text-gray-900 dark:text-white"
+									>
+										Total
+									</dt>
+									<dd
+										id="grandTotal"
+										class="text-base font-bold text-gray-900 dark:text-white"
+									>
+										$0.00
+									</dd>
+								</dl>
+							</div>
+
+							<a
+								onclick=" redirectToCheckoutPage()"
+								class="flex w-full items-center justify-center rounded-lg bg-[#1d4ed8] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1e40af] focus:outline-none focus:ring-4 focus:ring-[#93c5fd] cursor-pointer"
+								>Proceed to Checkout</a
+							>
+
+							<div class="flex items-center justify-center gap-2">
+								<span
+									class="text-sm font-normal text-gray-500 dark:text-gray-400"
+								>
+									or
+								</span>
+								<a
+									href="./ProductsPage.html"
+									title=""
+									class="inline-flex items-center gap-2 text-sm font-medium text-[#1d4ed8] underline hover:no-underline dark:text-[#3b82f6]"
+								>
+									Continue Shopping
+									<svg
+										class="h-5 w-5"
+										aria-hidden="true"
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+									>
+										<path
+											stroke="currentColor"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M19 12H5m14 0-4 4m4-4-4-4"
+										/>
+									</svg>
+								</a>
+							</div>
+						</div>
+
+						<div
+							class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6"
+						>
+							<form class="space-y-4">
+								<div>
+									<label
+										for="voucher"
+										class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+									>
+										Do you have a voucher or gift card?
+									</label>
+									<input
+										type="text"
+										id="voucher"
+										class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#3b82f6] focus:ring-[#3b82f6] dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-[#3b82f6] dark:focus:ring-[#3b82f6]"
+										placeholder=""
+										required
+									/>
+								</div>
+								<button
+									type="submit"
+									class="flex w-full items-center justify-center rounded-lg bg-[#1d4ed8] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1e40af] focus:outline-none focus:ring-4 focus:ring-[#93c5fd] dark:bg-[#2563eb] dark:hover:bg-[#1d4ed8] dark:focus:ring-[#1e40af]"
+								>
+									Apply Code
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
 		<script
 			type="text/javascript"
 			src="./js/navbar.js"
+		></script>
+		<script
+			type="text/javascript"
+			src="./js/globals.js"
+		></script>
+
+		<script
+			type="text/javascript"
+			src="./js/cart.js"
 		></script>
 	</body>
 </html>

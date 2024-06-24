@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Checkout</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+			integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+
+		<link
+			rel="stylesheet"
+			href="./css/navbar.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="./css/globals.css"
+		/>
+
+		<script src="https://cdn.tailwindcss.com"></script>
+	</head>
+	<body>
+		<!-- NAVBAR START -->
+		<nav class="bg-gray-800 h-fit w-full fixed top-0">
+			<div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+				<div
+					class="relative flex h-16 items-center justify-between"
+					id="mobileMenuBox"
+				>
+					<div
+						class="absolute inset-y-0 left-0 flex items-center sm:hidden"
+					>
+						<!-- Mobile menu button-->
+						<button
+							type="button"
+							class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+							aria-controls="mobile-menu"
+							aria-expanded="false"
+							onclick="expandNavbar()"
+						>
+							<span class="absolute -inset-0.5"></span>
+							<span class="sr-only">Open main menu</span>
+							<!--
+            Icon when menu is closed.
+
+            Menu open: "hidden", Menu closed: "block"
+          -->
+							<svg
+								class="block h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								aria-hidden="true"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+								/>
+							</svg>
+							<!--
+            Icon when menu is open.
+
+            Menu open: "block", Menu closed: "hidden"
+          -->
+							<svg
+								class="hidden h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								aria-hidden="true"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M6 18L18 6M6 6l12 12"
+								/>
+							</svg>
+						</button>
+					</div>
+					<div
+						class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+					>
+						<div class="flex flex-shrink-0 items-center">
+							<img
+								class="h-8 w-auto hover:cursor-pointer"
+								src="./assets/logo.png"
+								onclick="window.location.href = './index.html'"
+								alt="Logo"
+							/>
+						</div>
+						<div class="hidden sm:ml-6 sm:block">
+							<div class="flex space-x-4">
+								<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+								<a
+									href="./index.html"
+									class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+									aria-current="page"
+									>Home</a
+								>
+								<a
+									href="./ProductsPage.html"
+									class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+									>Products</a
+								>
+								<a
+									href="./CategoryPage.html"
+									class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+									>Category</a
+								>
+								<a
+									href="./AboutUs.html"
+									class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+									>About Us</a
+								>
+							</div>
+						</div>
+					</div>
+					<div
+						class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+					>
+						<button
+							type="button"
+							onclick="window.location.href = './Cart.html'"
+							class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+						>
+							<span class="absolute -inset-1.5"></span>
+							<span class="sr-only">View Cart</span>
+							<i
+								class="fas fa-shopping-cart px-2 py-2 rounded-full"
+							></i>
+						</button>
+
+						<!-- Profile dropdown -->
+						<div class="relative ml-3">
+							<div>
+								<button
+									type="button"
+									class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+									id="user-menu-button"
+									aria-expanded="false"
+									aria-haspopup="true"
+									onclick="expandProfile()"
+								>
+									<span class="absolute -inset-1.5"></span>
+									<span class="sr-only">Open user menu</span>
+									<img
+										class="h-8 w-8 rounded-full"
+										src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+										alt=""
+									/>
+								</button>
+							</div>
+
+							<!--
+            Dropdown menu, show/hide based on menu state.
+
+            Entering: "transition ease-out duration-100"
+              From: "transform opacity-0 scale-95"
+              To: "transform opacity-100 scale-100"
+            Leaving: "transition ease-in duration-75"
+              From: "transform opacity-100 scale-100"
+              To: "transform opacity-0 scale-95"
+          -->
+							<div
+								class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none scale-y-0"
+								role="menu"
+								aria-orientation="vertical"
+								aria-labelledby="user-menu-button"
+								tabindex="-1"
+								id="profileMenu"
+							>
+								<!-- Active: "bg-gray-100", Not Active: "" -->
+								<a
+									href="#"
+									class="block px-4 py-2 text-sm text-gray-700"
+									role="menuitem"
+									tabindex="-1"
+									id="user-menu-item-0"
+									>Your Profile</a
+								>
+								<a
+									href="#"
+									class="block px-4 py-2 text-sm text-gray-700"
+									role="menuitem"
+									tabindex="-1"
+									id="user-menu-item-1"
+									>Settings</a
+								>
+								<a
+									href="#"
+									class="block px-4 py-2 text-sm text-gray-700"
+									role="menuitem"
+									tabindex="-1"
+									id="user-menu-item-2"
+									>Sign out</a
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Mobile menu, show/hide based on menu state. -->
+			<div
+				class="sm:hidden overflow-hidden h-0"
+				id="mobile-menu"
+			>
+				<div class="space-y-1 px-2 pb-3 pt-2">
+					<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+					<a
+						href="./index.html"
+						class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+						aria-current="page"
+						>Home</a
+					>
+					<a
+						href="./ProductsPage.html"
+						class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+						>Products</a
+					>
+					<a
+						href="./CategoryPage.html"
+						class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+						>Category</a
+					>
+					<a
+						href="./AboutUs.html"
+						class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+						>About Us</a
+					>
+				</div>
+			</div>
+		</nav>
+		<!-- NAVBAR END -->
+
+		<!-- Scroll to Top Button -->
+		<div
+			onclick="topFunction()"
+			id="scrollbtn"
+			title="Go to top"
+			class="hidden fixed bottom-5 right-5 z-[10000]"
+		>
+			<button class="scroll-to-top-btn">
+				<svg
+					viewBox="0 0 384 512"
+					class="svgIcon"
+				>
+					<path
+						d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+					></path>
+				</svg>
+			</button>
+		</div>
+
+		<section class="bg-[#f8f8f8] py-16 dark:bg-gray-900 md:py-20">
+			<form
+				id="delivery-details-form"
+				class="mx-auto max-w-screen-xl px-4 2xl:px-0"
+			>
+				<div
+					class="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12 xl:gap-16"
+				>
+					<div class="min-w-0 flex-1 space-y-8">
+						<div class="space-y-4">
+							<h2
+								class="text-xl font-semibold text-gray-900 dark:text-white"
+							>
+								Delivery Details
+							</h2>
+
+							<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+								<div>
+									<label
+										for="name"
+										class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+									>
+										Your name
+									</label>
+									<input
+										type="text"
+										id="name"
+										class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#3b82f6] focus:ring-[#3b82f6] dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-[#3b82f6] dark:focus:ring-[#3b82f6] disabled:bg-gray-200 disabled:text-slate-900 disabled:border-gray-300"
+										placeholder="Bonnie Green"
+										required
+									/>
+								</div>
+
+								<div>
+									<label
+										for="email"
+										class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+									>
+										Your email*
+									</label>
+									<input
+										type="email"
+										id="email"
+										class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#3b82f6] focus:ring-[#3b82f6] dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-[#3b82f6] dark:focus:ring-[#3b82f6] disabled:bg-gray-200 disabled:text-slate-900 disabled:border-gray-300"
+										placeholder="name@gmail.com"
+										required
+									/>
+								</div>
+
+								<div>
+									<div class="mb-2 flex items-center gap-2">
+										<label
+											for="select-country-input-3"
+											class="block text-sm font-medium text-gray-900 dark:text-white"
+										>
+											Country*
+										</label>
+									</div>
+									<select
+										id="select-country-input-3"
+										class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#3b82f6] focus:ring-[#3b82f6] dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-[#3b82f6] dark:focus:ring-[#3b82f6] disabled:bg-gray-200 disabled:text-slate-900 disabled:border-gray-300"
+									>
+										<option selected>United States</option>
+										<option value="AS">Australia</option>
+										<option value="FR">France</option>
+										<option value="ES">Spain</option>
+										<option value="UK">
+											United Kingdom
+										</option>
+									</select>
+								</div>
+
+								<div>
+									<div class="mb-2 flex items-center gap-2">
+										<label
+											for="select-city-input-3"
+											class="block text-sm font-medium text-gray-900 dark:text-white"
+										>
+											City*
+										</label>
+									</div>
+									<select
+										id="select-city-input-3"
+										class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#3b82f6] focus:ring-[#3b82f6] dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-[#3b82f6] dark:focus:ring-[#3b82f6] disabled:bg-gray-200 disabled:text-slate-900 disabled:border-gray-300"
+									>
+										<option selected>San Francisco</option>
+										<option value="NY">New York</option>
+										<option value="LA">Los Angeles</option>
+										<option value="CH">Chicago</option>
+										<option value="HU">Houston</option>
+									</select>
+								</div>
+
+								<div>
+									<label
+										for="phone-input-3"
+										class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+									>
+										Phone Number*
+									</label>
+									<div class="flex items-center">
+										<button
+											id="dropdown-phone-button-3"
+											data-dropdown-toggle="dropdown-phone-3"
+											class="z-10 inline-flex shrink-0 items-center rounded-s-lg border border-gray-300 bg-gray-100 px-4 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-700 disabled:bg-gray-200 disabled:text-slate-900 disabled:border-gray-300"
+											type="button"
+											onclick="
+                        let dropdown = document.getElementById('dropdown-phone-3');
+                        dropdown.classList.toggle('hidden');
+                                            "
+										>
+											<svg
+												fill="none"
+												aria-hidden="true"
+												class="me-2 h-4 w-4"
+												viewBox="0 0 20 15"
+											>
+												<rect
+													width="19.6"
+													height="14"
+													y=".5"
+													fill="#fff"
+													rx="2"
+												/>
+												<mask
+													id="a"
+													style="mask-type: luminance"
+													width="20"
+													height="15"
+													x="0"
+													y="0"
+													maskUnits="userSpaceOnUse"
+												>
+													<rect
+														width="19.6"
+														height="14"
+														y=".5"
+														fill="#fff"
+														rx="2"
+													/>
+												</mask>
+												<g mask="url(#a)">
+													<path
+														fill="#D02F44"
+														fill-rule="evenodd"
+														d="M19.6.5H0v.933h19.6V.5zm0 1.867H0V3.3h19.6v-.933zM0 4.233h19.6v.934H0v-.934zM19.6 6.1H0v.933h19.6V6.1zM0 7.967h19.6V8.9H0v-.933zm19.6 1.866H0v.934h19.6v-.934zM0 11.7h19.6v.933H0V11.7zm19.6 1.867H0v.933h19.6v-.933z"
+														clip-rule="evenodd"
+													/>
+													<path
+														fill="#46467F"
+														d="M0 .5h8.4v6.533H0z"
+													/>
+													<g
+														filter="url(#filter0_d_343_121520)"
+													>
+														<path
+															fill="url(#paint0_linear_343_121520)"
+															fill-rule="evenodd"
+															d="M1.867 1.9a.467.467 0 11-.934 0 .467.467 0 01.934 0zm1.866 0a.467.467 0 11-.933 0 .467.467 0 01.933 0zm1.4.467a.467.467 0 100-.934.467.467 0 000 .934zM7.467 1.9a.467.467 0 11-.934 0 .467.467 0 01.934 0zM2.333 3.3a.467.467 0 100-.933.467.467 0 000 .933zm2.334-.467a.467.467 0 11-.934 0 .467.467 0 01.934 0zm1.4.467a.467.467 0 100-.933.467.467 0 000 .933zm1.4.467a.467.467 0 11-.934 0 .467.467 0 01.934 0zm-2.334.466a.467.467 0 100-.933.467.467 0 000 .933zm-1.4-.466a.467.467 0 11-.933 0 .467.467 0 01.933 0zM1.4 4.233a.467.467 0 100-.933.467.467 0 000 .933zm1.4.467a.467.467 0 11-.933 0 .467.467 0 01.933 0zm1.4.467a.467.467 0 100-.934.467.467 0 000 .934zM6.533 4.7a.467.467 0 11-.933 0 .467.467 0 01.933 0zM7 6.1a.467.467 0 100-.933.467.467 0 000 .933zm-1.4-.467a.467.467 0 11-.933 0 .467.467 0 01.933 0zM3.267 6.1a.467.467 0 100-.933.467.467 0 000 .933zm-1.4-.467a.467.467 0 11-.934 0 .467.467 0 01.934 0z"
+															clip-rule="evenodd"
+														/>
+													</g>
+												</g>
+												<defs>
+													<linearGradient
+														id="paint0_linear_343_121520"
+														x1=".933"
+														x2=".933"
+														y1="1.433"
+														y2="6.1"
+														gradientUnits="userSpaceOnUse"
+													>
+														<stop
+															stop-color="#fff"
+														/>
+														<stop
+															offset="1"
+															stop-color="#F0F0F0"
+														/>
+													</linearGradient>
+													<filter
+														id="filter0_d_343_121520"
+														width="6.533"
+														height="5.667"
+														x=".933"
+														y="1.433"
+														color-interpolation-filters="sRGB"
+														filterUnits="userSpaceOnUse"
+													>
+														<feFlood
+															flood-opacity="0"
+															result="BackgroundImageFix"
+														/>
+														<feColorMatrix
+															in="SourceAlpha"
+															result="hardAlpha"
+															values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+														/>
+														<feOffset dy="1" />
+														<feColorMatrix
+															values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"
+														/>
+														<feBlend
+															in2="BackgroundImageFix"
+															result="effect1_dropShadow_343_121520"
+														/>
+														<feBlend
+															in="SourceGraphic"
+															in2="effect1_dropShadow_343_121520"
+															result="shape"
+														/>
+													</filter>
+												</defs>
+											</svg>
+											+1
+											<svg
+												class="-me-0.5 ms-2 h-4 w-4"
+												aria-hidden="true"
+												xmlns="http://www.w3.org/2000/svg"
+												width="24"
+												height="24"
+												fill="none"
+												viewBox="0 0 24 24"
+											>
+												<path
+													stroke="currentColor"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="2"
+													d="m19 9-7 7-7-7"
+												/>
+											</svg>
+										</button>
+										<div
+											id="dropdown-phone-3"
+											class="z-10 hidden w-56 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700"
+										>
+											<ul
+												class="p-2 text-sm font-medium text-gray-700 dark:text-gray-200"
+												aria-labelledby="dropdown-phone-button-2"
+											>
+												<li>
+													<button
+														type="button"
+														class="inline-flex w-full rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+														role="menuitem"
+													>
+														<span
+															class="inline-flex items-center"
+														>
+															<svg
+																fill="none"
+																aria-hidden="true"
+																class="me-2 h-4 w-4"
+																viewBox="0 0 20 15"
+															>
+																<rect
+																	width="19.6"
+																	height="14"
+																	y=".5"
+																	fill="#fff"
+																	rx="2"
+																/>
+																<mask
+																	id="a"
+																	style="
+																		mask-type: luminance;
+																	"
+																	width="20"
+																	height="15"
+																	x="0"
+																	y="0"
+																	maskUnits="userSpaceOnUse"
+																>
+																	<rect
+																		width="19.6"
+																		height="14"
+																		y=".5"
+																		fill="#fff"
+																		rx="2"
+																	/>
+																</mask>
+																<g
+																	mask="url(#a)"
+																>
+																	<path
+																		fill="#D02F44"
+																		fill-rule="evenodd"
+																		d="M19.6.5H0v.933h19.6V.5zm0 1.867H0V3.3h19.6v-.933zM0 4.233h19.6v.934H0v-.934zM19.6 6.1H0v.933h19.6V6.1zM0 7.967h19.6V8.9H0v-.933zm19.6 1.866H0v.934h19.6v-.934zM0 11.7h19.6v.933H0V11.7zm19.6 1.867H0v.933h19.6v-.933z"
+																		clip-rule="evenodd"
+																	/>
+																	<path
+																		fill="#46467F"
+																		d="M0 .5h8.4v6.533H0z"
+																	/>
+																	<g
+																		filter="url(#filter0_d_343_121520)"
+																	>
+																		<path
+																			fill="url(#paint0_linear_343_121520)"
+																			fill-rule="evenodd"
+																			d="M1.867 1.9a.467.467 0 11-.934 0 .467.467 0 01.934 0zm1.866 0a.467.467 0 11-.933 0 .467.467 0 01.933 0zm1.4.467a.467.467 0 100-.934.467.467 0 000 .934zM7.467 1.9a.467.467 0 11-.934 0 .467.467 0 01.934 0zM2.333 3.3a.467.467 0 100-.933.467.467 0 000 .933zm2.334-.467a.467.467 0 11-.934 0 .467.467 0 01.934 0zm1.4.467a.467.467 0 100-.933.467.467 0 000 .933zm1.4.467a.467.467 0 11-.934 0 .467.467 0 01.934 0zm-2.334.466a.467.467 0 100-.933.467.467 0 000 .933zm-1.4-.466a.467.467 0 11-.933 0 .467.467 0 01.933 0zM1.4 4.233a.467.467 0 100-.933.467.467 0 000 .933zm1.4.467a.467.467 0 11-.933 0 .467.467 0 01.933 0zm1.4.467a.467.467 0 100-.934.467.467 0 000 .934zM6.533 4.7a.467.467 0 11-.933 0 .467.467 0 01.933 0zM7 6.1a.467.467 0 100-.933.467.467 0 000 .933zm-1.4-.467a.467.467 0 11-.933 0 .467.467 0 01.933 0zM3.267 6.1a.467.467 0 100-.933.467.467 0 000 .933zm-1.4-.467a.467.467 0 11-.934 0 .467.467 0 01.934 0z"
+																			clip-rule="evenodd"
+																		/>
+																	</g>
+																</g>
+																<defs>
+																	<linearGradient
+																		id="paint0_linear_343_121520"
+																		x1=".933"
+																		x2=".933"
+																		y1="1.433"
+																		y2="6.1"
+																		gradientUnits="userSpaceOnUse"
+																	>
+																		<stop
+																			stop-color="#fff"
+																		/>
+																		<stop
+																			offset="1"
+																			stop-color="#F0F0F0"
+																		/>
+																	</linearGradient>
+																	<filter
+																		id="filter0_d_343_121520"
+																		width="6.533"
+																		height="5.667"
+																		x=".933"
+																		y="1.433"
+																		color-interpolation-filters="sRGB"
+																		filterUnits="userSpaceOnUse"
+																	>
+																		<feFlood
+																			flood-opacity="0"
+																			result="BackgroundImageFix"
+																		/>
+																		<feColorMatrix
+																			in="SourceAlpha"
+																			result="hardAlpha"
+																			values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+																		/>
+																		<feOffset
+																			dy="1"
+																		/>
+																		<feColorMatrix
+																			values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"
+																		/>
+																		<feBlend
+																			in2="BackgroundImageFix"
+																			result="effect1_dropShadow_343_121520"
+																		/>
+																		<feBlend
+																			in="SourceGraphic"
+																			in2="effect1_dropShadow_343_121520"
+																			result="shape"
+																		/>
+																	</filter>
+																</defs>
+															</svg>
+															United States (+1)
+														</span>
+													</button>
+												</li>
+												<li>
+													<button
+														type="button"
+														class="inline-flex w-full rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+														role="menuitem"
+													>
+														<span
+															class="inline-flex items-center"
+														>
+															<svg
+																class="me-2 h-4 w-4"
+																fill="none"
+																viewBox="0 0 20 15"
+															>
+																<rect
+																	width="19.6"
+																	height="14"
+																	y=".5"
+																	fill="#fff"
+																	rx="2"
+																/>
+																<mask
+																	id="a"
+																	style="
+																		mask-type: luminance;
+																	"
+																	width="20"
+																	height="15"
+																	x="0"
+																	y="0"
+																	maskUnits="userSpaceOnUse"
+																>
+																	<rect
+																		width="19.6"
+																		height="14"
+																		y=".5"
+																		fill="#fff"
+																		rx="2"
+																	/>
+																</mask>
+																<g
+																	mask="url(#a)"
+																>
+																	<path
+																		fill="#0A17A7"
+																		d="M0 .5h19.6v14H0z"
+																	/>
+																	<path
+																		fill="#fff"
+																		fill-rule="evenodd"
+																		d="M-.898-.842L7.467 4.8V-.433h4.667V4.8l8.364-5.642L21.542.706l-6.614 4.46H19.6v4.667h-4.672l6.614 4.46-1.044 1.549-8.365-5.642v5.233H7.467V10.2l-8.365 5.642-1.043-1.548 6.613-4.46H0V5.166h4.672L-1.941.706-.898-.842z"
+																		clip-rule="evenodd"
+																	/>
+																	<path
+																		stroke="#DB1F35"
+																		stroke-linecap="round"
+																		stroke-width=".667"
+																		d="M13.067 4.933L21.933-.9M14.009 10.088l7.947 5.357M5.604 4.917L-2.686-.67M6.503 10.024l-9.189 6.093"
+																	/>
+																	<path
+																		fill="#E6273E"
+																		fill-rule="evenodd"
+																		d="M0 8.9h8.4v5.6h2.8V8.9h8.4V6.1h-8.4V.5H8.4v5.6H0v2.8z"
+																		clip-rule="evenodd"
+																	/>
+																</g>
+															</svg>
+															United Kingdom (+44)
+														</span>
+													</button>
+												</li>
+												<li>
+													<button
+														type="button"
+														class="inline-flex w-full rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+														role="menuitem"
+													>
+														<span
+															class="inline-flex items-center"
+														>
+															<svg
+																class="me-2 h-4 w-4"
+																fill="none"
+																viewBox="0 0 20 15"
+																xmlns="http://www.w3.org/2000/svg"
+															>
+																<rect
+																	width="19.6"
+																	height="14"
+																	y=".5"
+																	fill="#fff"
+																	rx="2"
+																/>
+																<mask
+																	id="a"
+																	style="
+																		mask-type: luminance;
+																	"
+																	width="20"
+																	height="15"
+																	x="0"
+																	y="0"
+																	maskUnits="userSpaceOnUse"
+																>
+																	<rect
+																		width="19.6"
+																		height="14"
+																		y=".5"
+																		fill="#fff"
+																		rx="2"
+																	/>
+																</mask>
+																<g
+																	mask="url(#a)"
+																>
+																	<path
+																		fill="#0A17A7"
+																		d="M0 .5h19.6v14H0z"
+																	/>
+																	<path
+																		fill="#fff"
+																		stroke="#fff"
+																		stroke-width=".667"
+																		d="M0 .167h-.901l.684.586 3.15 2.7v.609L-.194 6.295l-.14.1v1.24l.51-.319L3.83 5.033h.73L7.7 7.276a.488.488 0 00.601-.767L5.467 4.08v-.608l2.987-2.134a.667.667 0 00.28-.543V-.1l-.51.318L4.57 2.5h-.73L.66.229.572.167H0z"
+																	/>
+																	<path
+																		fill="url(#paint0_linear_374_135177)"
+																		fill-rule="evenodd"
+																		d="M0 2.833V4.7h3.267v2.133c0 .369.298.667.666.667h.534a.667.667 0 00.666-.667V4.7H8.2a.667.667 0 00.667-.667V3.5a.667.667 0 00-.667-.667H5.133V.5H3.267v2.333H0z"
+																		clip-rule="evenodd"
+																	/>
+																	<path
+																		fill="url(#paint1_linear_374_135177)"
+																		fill-rule="evenodd"
+																		d="M0 3.3h3.733V.5h.934v2.8H8.4v.933H4.667v2.8h-.934v-2.8H0V3.3z"
+																		clip-rule="evenodd"
+																	/>
+																	<path
+																		fill="#fff"
+																		fill-rule="evenodd"
+																		d="M4.2 11.933l-.823.433.157-.916-.666-.65.92-.133.412-.834.411.834.92.134-.665.649.157.916-.823-.433zm9.8.7l-.66.194.194-.66-.194-.66.66.193.66-.193-.193.66.193.66-.66-.194zm0-8.866l-.66.193.194-.66-.194-.66.66.193.66-.193-.193.66.193.66-.66-.193zm2.8 2.8l-.66.193.193-.66-.193-.66.66.193.66-.193-.193.66.193.66-.66-.193zm-5.6.933l-.66.193.193-.66-.193-.66.66.194.66-.194-.193.66.193.66-.66-.193zm4.2 1.167l-.33.096.096-.33-.096-.33.33.097.33-.097-.097.33.097.33-.33-.096z"
+																		clip-rule="evenodd"
+																	/>
+																</g>
+																<defs>
+																	<linearGradient
+																		id="paint0_linear_374_135177"
+																		x1="0"
+																		x2="0"
+																		y1=".5"
+																		y2="7.5"
+																		gradientUnits="userSpaceOnUse"
+																	>
+																		<stop
+																			stop-color="#fff"
+																		/>
+																		<stop
+																			offset="1"
+																			stop-color="#F0F0F0"
+																		/>
+																	</linearGradient>
+																	<linearGradient
+																		id="paint1_linear_374_135177"
+																		x1="0"
+																		x2="0"
+																		y1=".5"
+																		y2="7.033"
+																		gradientUnits="userSpaceOnUse"
+																	>
+																		<stop
+																			stop-color="#FF2E3B"
+																		/>
+																		<stop
+																			offset="1"
+																			stop-color="#FC0D1B"
+																		/>
+																	</linearGradient>
+																</defs>
+															</svg>
+															Australia (+61)
+														</span>
+													</button>
+												</li>
+												<li>
+													<button
+														type="button"
+														class="inline-flex w-full rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+														role="menuitem"
+													>
+														<span
+															class="inline-flex items-center"
+														>
+															<svg
+																class="me-2 h-4 w-4"
+																fill="none"
+																viewBox="0 0 20 15"
+															>
+																<rect
+																	width="19.6"
+																	height="14"
+																	y=".5"
+																	fill="#fff"
+																	rx="2"
+																/>
+																<mask
+																	id="a"
+																	style="
+																		mask-type: luminance;
+																	"
+																	width="20"
+																	height="15"
+																	x="0"
+																	y="0"
+																	maskUnits="userSpaceOnUse"
+																>
+																	<rect
+																		width="19.6"
+																		height="14"
+																		y=".5"
+																		fill="#fff"
+																		rx="2"
+																	/>
+																</mask>
+																<g
+																	mask="url(#a)"
+																>
+																	<path
+																		fill="#262626"
+																		fill-rule="evenodd"
+																		d="M0 5.167h19.6V.5H0v4.667z"
+																		clip-rule="evenodd"
+																	/>
+																	<g
+																		filter="url(#filter0_d_374_135180)"
+																	>
+																		<path
+																			fill="#F01515"
+																			fill-rule="evenodd"
+																			d="M0 9.833h19.6V5.167H0v4.666z"
+																			clip-rule="evenodd"
+																		/>
+																	</g>
+																	<g
+																		filter="url(#filter1_d_374_135180)"
+																	>
+																		<path
+																			fill="#FFD521"
+																			fill-rule="evenodd"
+																			d="M0 14.5h19.6V9.833H0V14.5z"
+																			clip-rule="evenodd"
+																		/>
+																	</g>
+																</g>
+																<defs>
+																	<filter
+																		id="filter0_d_374_135180"
+																		width="19.6"
+																		height="4.667"
+																		x="0"
+																		y="5.167"
+																		color-interpolation-filters="sRGB"
+																		filterUnits="userSpaceOnUse"
+																	>
+																		<feFlood
+																			flood-opacity="0"
+																			result="BackgroundImageFix"
+																		/>
+																		<feColorMatrix
+																			in="SourceAlpha"
+																			result="hardAlpha"
+																			values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+																		/>
+																		<feOffset />
+																		<feColorMatrix
+																			values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"
+																		/>
+																		<feBlend
+																			in2="BackgroundImageFix"
+																			result="effect1_dropShadow_374_135180"
+																		/>
+																		<feBlend
+																			in="SourceGraphic"
+																			in2="effect1_dropShadow_374_135180"
+																			result="shape"
+																		/>
+																	</filter>
+																	<filter
+																		id="filter1_d_374_135180"
+																		width="19.6"
+																		height="4.667"
+																		x="0"
+																		y="9.833"
+																		color-interpolation-filters="sRGB"
+																		filterUnits="userSpaceOnUse"
+																	>
+																		<feFlood
+																			flood-opacity="0"
+																			result="BackgroundImageFix"
+																		/>
+																		<feColorMatrix
+																			in="SourceAlpha"
+																			result="hardAlpha"
+																			values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+																		/>
+																		<feOffset />
+																		<feColorMatrix
+																			values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"
+																		/>
+																		<feBlend
+																			in2="BackgroundImageFix"
+																			result="effect1_dropShadow_374_135180"
+																		/>
+																		<feBlend
+																			in="SourceGraphic"
+																			in2="effect1_dropShadow_374_135180"
+																			result="shape"
+																		/>
+																	</filter>
+																</defs>
+															</svg>
+															Germany (+49)
+														</span>
+													</button>
+												</li>
+												<li>
+													<button
+														type="button"
+														class="inline-flex w-full rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+														role="menuitem"
+													>
+														<span
+															class="inline-flex items-center"
+														>
+															<svg
+																class="me-2 h-4 w-4"
+																fill="none"
+																viewBox="0 0 20 15"
+															>
+																<rect
+																	width="19.1"
+																	height="13.5"
+																	x=".25"
+																	y=".75"
+																	fill="#fff"
+																	stroke="#F5F5F5"
+																	stroke-width=".5"
+																	rx="1.75"
+																/>
+																<mask
+																	id="a"
+																	style="
+																		mask-type: luminance;
+																	"
+																	width="20"
+																	height="15"
+																	x="0"
+																	y="0"
+																	maskUnits="userSpaceOnUse"
+																>
+																	<rect
+																		width="19.1"
+																		height="13.5"
+																		x=".25"
+																		y=".75"
+																		fill="#fff"
+																		stroke="#fff"
+																		stroke-width=".5"
+																		rx="1.75"
+																	/>
+																</mask>
+																<g
+																	mask="url(#a)"
+																>
+																	<path
+																		fill="#F44653"
+																		d="M13.067.5H19.6v14h-6.533z"
+																	/>
+																	<path
+																		fill="#1035BB"
+																		fill-rule="evenodd"
+																		d="M0 14.5h6.533V.5H0v14z"
+																		clip-rule="evenodd"
+																	/>
+																</g>
+															</svg>
+															France (+33)
+														</span>
+													</button>
+												</li>
+											</ul>
+										</div>
+										<div class="relative w-full">
+											<input
+												type="text"
+												id="phone-input"
+												class="z-20 block w-full rounded-e-lg border border-s-0 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#3b82f6] focus:ring-[#3b82f6] dark:border-gray-600 dark:border-s-gray-700 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-[#3b82f6] disabled:bg-gray-200 disabled:text-slate-900 disabled:border-gray-300"
+												pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+												placeholder="123-456-7890"
+												required
+											/>
+										</div>
+									</div>
+								</div>
+
+								<div>
+									<label
+										for="address"
+										class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+									>
+										Address*
+									</label>
+									<input
+										type="text"
+										id="address"
+										class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#3b82f6] focus:ring-[#3b82f6] dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-[#3b82f6] dark:focus:ring-[#3b82f6] disabled:bg-gray-200 disabled:text-slate-900 disabled:border-gray-300"
+										placeholder="123 Street, City, Country"
+									/>
+								</div>
+
+								<div>
+									<label
+										for="pincode"
+										class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+									>
+										Pin Code*
+									</label>
+									<input
+										type="number"
+										maxlength="6"
+										minlength="4"
+										id="pincode"
+										class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#3b82f6] focus:ring-[#3b82f6] dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-[#3b82f6] dark:focus:ring-[#3b82f6] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none disabled:bg-gray-200 disabled:text-slate-900 disabled:border-gray-300"
+										placeholder="12345"
+									/>
+								</div>
+
+								<div class="sm:col-span-2">
+									<button
+										class="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-[#1d4ed8] focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+										id="submitBtn"
+									>
+										<svg
+											class="h-5 w-5"
+											aria-hidden="true"
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											fill="none"
+											viewBox="0 0 24 24"
+										>
+											<path
+												stroke="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M5 12h14m-7 7V5"
+											/>
+										</svg>
+										Add new address
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="space-y-4">
+							<h3
+								class="text-xl font-semibold text-gray-900 dark:text-white"
+							>
+								Payment
+							</h3>
+
+							<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+								<div
+									class="rounded-lg border border-gray-200 bg-gray-50 p-4 ps-4 dark:border-gray-700 dark:bg-gray-800"
+								>
+									<div class="flex items-start">
+										<div class="flex h-5 items-center">
+											<input
+												id="credit-card"
+												aria-describedby="credit-card-text"
+												type="radio"
+												name="payment-method"
+												value=""
+												class="h-4 w-4 border-gray-300 bg-white text-[#2563eb] focus:ring-2 focus:ring-[#2563eb] dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-[#2563eb]"
+												checked
+											/>
+										</div>
+
+										<div class="ms-4 text-sm">
+											<label
+												for="credit-card"
+												class="font-medium leading-none text-gray-900 dark:text-white"
+											>
+												Credit Card
+											</label>
+											<p
+												id="credit-card-text"
+												class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400"
+											>
+												Pay with your credit card
+											</p>
+										</div>
+									</div>
+
+									<div class="mt-4 flex items-center gap-2">
+										<button
+											type="button"
+											class="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+										>
+											Delete
+										</button>
+
+										<div
+											class="h-3 w-px shrink-0 bg-gray-200 dark:bg-gray-700"
+										></div>
+
+										<button
+											type="button"
+											class="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+										>
+											Edit
+										</button>
+									</div>
+								</div>
+
+								<div
+									class="rounded-lg border border-gray-200 bg-gray-50 p-4 ps-4 dark:border-gray-700 dark:bg-gray-800"
+								>
+									<div class="flex items-start">
+										<div class="flex h-5 items-center">
+											<input
+												id="pay-on-delivery"
+												aria-describedby="pay-on-delivery-text"
+												type="radio"
+												name="payment-method"
+												value=""
+												class="h-4 w-4 border-gray-300 bg-white text-[#2563eb] focus:ring-2 focus:ring-[#2563eb] dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-[#2563eb]"
+											/>
+										</div>
+
+										<div class="ms-4 text-sm">
+											<label
+												for="pay-on-delivery"
+												class="font-medium leading-none text-gray-900 dark:text-white"
+											>
+												Payment on delivery
+											</label>
+											<p
+												id="pay-on-delivery-text"
+												class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400"
+											>
+												+$15 payment processing fee
+											</p>
+										</div>
+									</div>
+
+									<div class="mt-4 flex items-center gap-2">
+										<button
+											type="button"
+											class="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+										>
+											Delete
+										</button>
+
+										<div
+											class="h-3 w-px shrink-0 bg-gray-200 dark:bg-gray-700"
+										></div>
+
+										<button
+											type="button"
+											class="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+										>
+											Edit
+										</button>
+									</div>
+								</div>
+
+								<div
+									class="rounded-lg border border-gray-200 bg-gray-50 p-4 ps-4 dark:border-gray-700 dark:bg-gray-800"
+								>
+									<div class="flex items-start">
+										<div class="flex h-5 items-center">
+											<input
+												id="paypal-2"
+												aria-describedby="paypal-text"
+												type="radio"
+												name="payment-method"
+												value=""
+												class="h-4 w-4 border-gray-300 bg-white text-[#2563eb] focus:ring-2 focus:ring-[#2563eb] dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-[#2563eb]"
+											/>
+										</div>
+
+										<div class="ms-4 text-sm">
+											<label
+												for="paypal-2"
+												class="font-medium leading-none text-gray-900 dark:text-white"
+											>
+												Paypal account
+											</label>
+											<p
+												id="paypal-text"
+												class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400"
+											>
+												Connect to your account
+											</p>
+										</div>
+									</div>
+
+									<div class="mt-4 flex items-center gap-2">
+										<button
+											type="button"
+											class="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+										>
+											Delete
+										</button>
+
+										<div
+											class="h-3 w-px shrink-0 bg-gray-200 dark:bg-gray-700"
+										></div>
+
+										<button
+											type="button"
+											class="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+										>
+											Edit
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="space-y-4">
+							<h3
+								class="text-xl font-semibold text-gray-900 dark:text-white"
+							>
+								Delivery Methods
+							</h3>
+
+							<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+								<div
+									class="rounded-lg border border-gray-200 bg-gray-50 p-4 ps-4 dark:border-gray-700 dark:bg-gray-800"
+								>
+									<div class="flex items-start">
+										<div class="flex h-5 items-center">
+											<input
+												id="dhl"
+												aria-describedby="dhl-text"
+												type="radio"
+												name="delivery-method"
+												value=""
+												class="h-4 w-4 border-gray-300 bg-white text-[#2563eb] focus:ring-2 focus:ring-[#2563eb] dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-[#2563eb]"
+												checked
+											/>
+										</div>
+
+										<div class="ms-4 text-sm">
+											<label
+												for="dhl"
+												class="font-medium leading-none text-gray-900 dark:text-white"
+											>
+												$15 - DHL Fast Delivery
+											</label>
+											<p
+												id="dhl-text"
+												class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400"
+											>
+												Get it by Tommorow
+											</p>
+										</div>
+									</div>
+								</div>
+
+								<div
+									class="rounded-lg border border-gray-200 bg-gray-50 p-4 ps-4 dark:border-gray-700 dark:bg-gray-800"
+								>
+									<div class="flex items-start">
+										<div class="flex h-5 items-center">
+											<input
+												id="fedex"
+												aria-describedby="fedex-text"
+												type="radio"
+												name="delivery-method"
+												value=""
+												class="h-4 w-4 border-gray-300 bg-white text-[#2563eb] focus:ring-2 focus:ring-[#2563eb] dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-[#2563eb]"
+											/>
+										</div>
+
+										<div class="ms-4 text-sm">
+											<label
+												for="fedex"
+												class="font-medium leading-none text-gray-900 dark:text-white"
+											>
+												Free Delivery - FedEx
+											</label>
+											<p
+												id="fedex-text"
+												class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400"
+											>
+												Get it by Friday, 13 Dec 2023
+											</p>
+										</div>
+									</div>
+								</div>
+
+								<div
+									class="rounded-lg border border-gray-200 bg-gray-50 p-4 ps-4 dark:border-gray-700 dark:bg-gray-800"
+								>
+									<div class="flex items-start">
+										<div class="flex h-5 items-center">
+											<input
+												id="express"
+												aria-describedby="express-text"
+												type="radio"
+												name="delivery-method"
+												value=""
+												class="h-4 w-4 border-gray-300 bg-white text-[#2563eb] focus:ring-2 focus:ring-[#2563eb] dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-[#2563eb]"
+											/>
+										</div>
+
+										<div class="ms-4 text-sm">
+											<label
+												for="express"
+												class="font-medium leading-none text-gray-900 dark:text-white"
+											>
+												$49 - Express Delivery
+											</label>
+											<p
+												id="express-text"
+												class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400"
+											>
+												Get it today
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<label
+								for="voucher"
+								class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+							>
+								Enter a gift card, voucher or promotional code
+							</label>
+							<div class="flex max-w-md items-center gap-4">
+								<input
+									type="text"
+									id="voucher"
+									class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#3b82f6] focus:ring-[#3b82f6] dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-[#3b82f6] dark:focus:ring-[#3b82f6]"
+									placeholder=""
+								/>
+								<button
+									type="button"
+									class="flex items-center justify-center rounded-lg bg-[#1d4ed8] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1e40af] focus:outline-none focus:ring-4 focus:ring-[#93c5fd] dark:bg-[#2563eb] dark:hover:bg-[#1d4ed8] dark:focus:ring-[#1e40af]"
+								>
+									Apply
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<div
+						class="mt-6 w-full space-y-6 sm:mt-8 lg:mt-0 lg:max-w-xs xl:max-w-md"
+					>
+						<div class="flow-root">
+							<div
+								class="-my-3 divide-y divide-gray-200 dark:divide-gray-800"
+							>
+								<div class="py-3">
+									<h3
+										class="text-lg font-semibold text-gray-900 dark:text-white"
+									>
+										Order Summary
+									</h3>
+								</div>
+								<dl
+									class="flex items-center justify-between gap-4 py-3"
+								>
+									<dt
+										class="text-base font-normal text-gray-500 dark:text-gray-400"
+									>
+										Subtotal
+									</dt>
+									<dd
+										id="originalPrice"
+										class="text-base font-medium text-gray-900 dark:text-white"
+									>
+										$0.00
+									</dd>
+								</dl>
+
+								<dl
+									class="flex items-center justify-between gap-4 py-3"
+								>
+									<dt
+										class="text-base font-normal text-gray-500 dark:text-gray-400"
+									>
+										Delivery Fee
+									</dt>
+									<dd
+										id="deliveryFee"
+										class="text-base font-medium text-gray-900 dark:text-white"
+									>
+										$0.00
+									</dd>
+								</dl>
+
+								<dl
+									class="flex items-center justify-between gap-4 py-3"
+								>
+									<dt
+										class="text-base font-normal text-gray-500 dark:text-gray-400"
+									>
+										Tax (10%)
+									</dt>
+									<dd
+										id="tax"
+										class="text-base font-medium text-gray-900 dark:text-white"
+									>
+										$0.00
+									</dd>
+								</dl>
+
+								<dl
+									class="flex items-center justify-between gap-4 py-3"
+								>
+									<dt
+										class="text-base font-bold text-gray-900 dark:text-white"
+									>
+										Total
+									</dt>
+									<dd
+										id="grandTotal"
+										class="text-base font-bold text-gray-900 dark:text-white"
+									>
+										$0.00
+									</dd>
+								</dl>
+							</div>
+						</div>
+
+						<div class="space-y-3">
+							<button
+								type="submit"
+								class="flex w-full items-center justify-center rounded-lg bg-[#1d4ed8] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1e40af] focus:outline-none focus:ring-4 focus:ring-[#93c5fd] dark:bg-[#2563eb] dark:hover:bg-[#1d4ed8] dark:focus:ring-[#1e40af]"
+								onclick="ProceedToPayment()"
+							>
+								Proceed to Payment
+							</button>
+
+							<p
+								class="text-sm font-normal text-gray-500 dark:text-gray-400"
+							>
+								One or more items in your cart require an
+								account.
+								<a
+									href="#"
+									title=""
+									class="font-medium text-[#1d4ed8] underline hover:no-underline dark:text-[#3b82f6]"
+									>Sign in or create an account now.</a
+								>.
+							</p>
+						</div>
+					</div>
+				</div>
+			</form>
+		</section>
+
+		<!-- FOOTER -->
+		<footer
+			class="bg-white dark:bg-gray-900 mt-24 border-t-2 border-t-gray-400"
+		>
+			<div class="mx-auto w-full max-w-screen-xl">
+				<div
+					class="grid items-start justify-evenly grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4"
+				>
+					<div>
+						<h2
+							class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
+						>
+							Company
+						</h2>
+						<ul
+							class="text-gray-500 dark:text-gray-400 font-medium"
+						>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>About</a
+								>
+							</li>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>Careers</a
+								>
+							</li>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>Brand Center</a
+								>
+							</li>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>Blog</a
+								>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<h2
+							class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
+						>
+							Help center
+						</h2>
+						<ul
+							class="text-gray-500 dark:text-gray-400 font-medium"
+						>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>Discord Server</a
+								>
+							</li>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>Twitter</a
+								>
+							</li>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>Facebook</a
+								>
+							</li>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>Contact Us</a
+								>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<h2
+							class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
+						>
+							Legal
+						</h2>
+						<ul
+							class="text-gray-500 dark:text-gray-400 font-medium"
+						>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>Privacy Policy</a
+								>
+							</li>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>Licensing</a
+								>
+							</li>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>Terms &amp; Conditions</a
+								>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<h2
+							class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
+						>
+							Download
+						</h2>
+						<ul
+							class="text-gray-500 dark:text-gray-400 font-medium"
+						>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>iOS</a
+								>
+							</li>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>Android</a
+								>
+							</li>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>Windows</a
+								>
+							</li>
+							<li class="mb-4">
+								<a
+									href="#"
+									class="hover:underline"
+									>MacOS</a
+								>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div
+					class="px-4 py-6 border-t-2 border-t-gray-100 md:flex md:items-center md:justify-between"
+				>
+					<span
+						class="text-sm text-gray-500 dark:text-gray-300 sm:text-center"
+						>© 2024 <a href="https://flowbite.com/">Tirth Desai</a>.
+						All Rights Reserved.
+					</span>
+					<div
+						class="flex mt-4 sm:justify-center md:mt-0 space-x-5 rtl:space-x-reverse"
+					>
+						<a
+							href="#"
+							class="text-gray-400 hover:text-gray-900 dark:hover:text-white"
+						>
+							<svg
+								class="w-4 h-4"
+								aria-hidden="true"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="currentColor"
+								viewBox="0 0 8 19"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+							<span class="sr-only">Facebook page</span>
+						</a>
+						<a
+							href="#"
+							class="text-gray-400 hover:text-gray-900 dark:hover:text-white"
+						>
+							<svg
+								class="w-4 h-4"
+								aria-hidden="true"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="currentColor"
+								viewBox="0 0 21 16"
+							>
+								<path
+									d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM6.678 10.813a1.941 1.941 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"
+								/>
+							</svg>
+							<span class="sr-only">Discord community</span>
+						</a>
+						<a
+							href="#"
+							class="text-gray-400 hover:text-gray-900 dark:hover:text-white"
+						>
+							<svg
+								class="w-4 h-4"
+								aria-hidden="true"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="currentColor"
+								viewBox="0 0 20 17"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+							<span class="sr-only">Twitter page</span>
+						</a>
+						<a
+							href="#"
+							class="text-gray-400 hover:text-gray-900 dark:hover:text-white"
+						>
+							<svg
+								class="w-4 h-4"
+								aria-hidden="true"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="currentColor"
+								viewBox="0 0 20 20"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+							<span class="sr-only">GitHub account</span>
+						</a>
+						<a
+							href="#"
+							class="text-gray-400 hover:text-gray-900 dark:hover:text-white"
+						>
+							<svg
+								class="w-4 h-4"
+								aria-hidden="true"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="currentColor"
+								viewBox="0 0 20 20"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M10 0a10 10 0 1 0 10 10A10.009 10.009 0 0 0 10 0Zm6.613 4.614a8.523 8.523 0 0 1 1.93 5.32 20.094 20.094 0 0 0-5.949-.274c-.059-.149-.122-.292-.184-.441a23.879 23.879 0 0 0-.566-1.239 11.41 11.41 0 0 0 4.769-3.366ZM8 1.707a8.821 8.821 0 0 1 2-.238 8.5 8.5 0 0 1 5.664 2.152 9.608 9.608 0 0 1-4.476 3.087A45.758 45.758 0 0 0 8 1.707ZM1.642 8.262a8.57 8.57 0 0 1 4.73-5.981A53.998 53.998 0 0 1 9.54 7.222a32.078 32.078 0 0 1-7.9 1.04h.002Zm2.01 7.46a8.51 8.51 0 0 1-2.2-5.707v-.262a31.64 31.64 0 0 0 8.777-1.219c.243.477.477.964.692 1.449-.114.032-.227.067-.336.1a13.569 13.569 0 0 0-6.942 5.636l.009.003ZM10 18.556a8.508 8.508 0 0 1-5.243-1.8 11.717 11.717 0 0 1 6.7-5.332.509.509 0 0 1 .055-.02 35.65 35.65 0 0 1 1.819 6.476 8.476 8.476 0 0 1-3.331.676Zm4.772-1.462A37.232 37.232 0 0 0 13.113 11a12.513 12.513 0 0 1 5.321.364 8.56 8.56 0 0 1-3.66 5.73h-.002Z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+							<span class="sr-only">Dribbble account</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script
+			type="text/javascript"
+			src="./js/navbar.js"
+		></script>
+		<script
+			type="text/javascript"
+			src="./js/globals.js"
+		></script>
+		<script
+			type="text/javascript"
+			src="./js/checkout.js"
+		></script>
+	</body>
+</html>
