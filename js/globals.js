@@ -115,6 +115,83 @@ function addToCart(product_id) {
     });
 }
 
+function csvJson(csv) {
+    // Split the CSV data by new lines to get each row
+    const lines = csv.trim().split('\n');
+
+    // Extract the headers by splitting the first line
+    const headers = parseCSVLine(lines[0]);
+
+    // Initialize an array to hold the JSON data
+    const jsonData = [];
+
+    // Iterate over each line (skipping the first line with headers)
+    for (let i = 1; i < lines.length; i++) {
+        const obj = {};
+        const currentLine = parseCSVLine(lines[i]);
+
+        // Assign the values to the corresponding headers
+        headers.forEach((header, index) => {
+            obj[header.trim()] = currentLine[index].trim();
+        });
+
+        // Add the current object to the JSON array
+        jsonData.push(obj);
+    }
+
+    // Return the JSON array
+    return jsonData;
+}
+
+function parseCSVLine(line) {
+    const result = [];
+    let insideQuotes = false;
+    let value = '';
+
+    for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+
+        if (char === '"' && (i === 0 || line[i - 1] !== '\\')) {
+            insideQuotes = !insideQuotes;
+        } else if (char === ',' && !insideQuotes) {
+            result.push(value);
+            value = '';
+        } else {
+            value += char;
+        }
+    }
+    result.push(value); // Add the last value
+
+    // Remove surrounding quotes and unescape double quotes
+    return result.map(val => val.replace(/^"(.*)"$/, '$1').replace(/""/g, '"'));
+}
+
+function cleanCategories(categories) {
+    const seperatedValues = categories.split("|").map((category) => category.trim());
+    const output = [];
+    for (const category of seperatedValues) {
+        const splittedValue = splitCamelCase(category).join(" ");
+        if (splittedValue.includes("&")) {
+            output.push(splittedValue.split("&").join(" & "));
+        } else {
+            output.push(splittedValue);
+        }
+
+
+    }
+
+    return output;
+}
+
+function splitCamelCase(word) {
+    return word
+        .replace(/([a-z])([A-Z])/g, '$1 $2')  // Insert space before each capital letter preceded by a lowercase letter
+        .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')  // Handle acronyms followed by a regular word part
+        .replace(/([0-9])([A-Z])/g, '$1 $2')  // Handle numbers followed by capital letters
+        .trim() // Remove any leading/trailing spaces
+        .split(' '); // Split the string into an array of words
+}
+
 window.createProductCard = createProductCard;
 window.addToCart = addToCart;
 window.watch = watch;

@@ -6,7 +6,7 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
-		<title>Confirm Order</title>
+		<title>Search Products</title>
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
@@ -19,15 +19,21 @@
 			rel="stylesheet"
 			href="./css/navbar.css"
 		/>
+
 		<link
 			rel="stylesheet"
 			href="./css/globals.css"
 		/>
 
+		<link
+			rel="stylesheet"
+			href="./css/product-card.css"
+		/>
+
 		<script src="https://cdn.tailwindcss.com"></script>
 	</head>
 	<body>
-		<!-- --------------------- NAVBAR ---------------------- -->
+		<!-- ------------------ NAVBAR STARTS ------------------ -->
 		<nav class="bg-gray-800 h-fit w-full fixed">
 			<div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 				<div
@@ -114,7 +120,7 @@
 								>
 								<a
 									href="./CategoryPage.html"
-									class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+									class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
 									>Category</a
 								>
 								<a
@@ -136,23 +142,24 @@
 						<button
 							type="button"
 							onclick="window.location.href = './Cart.html'"
-							class="relative rounded-full bg-gray-700 p-1 text-gray-400 text-white outline-none"
+							class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
 						>
 							<span class="absolute -inset-1.5"></span>
 							<span class="sr-only">View Cart</span>
 							<i
-								class="fas fa-shopping-cart px-2 py-2 rounded-full text-gray-400"
+								class="fas fa-shopping-cart px-2 py-2 rounded-full"
 							></i>
 						</button>
-
 						<button
 							type="button"
-							onclick="window.location.href = './SearchPage.html'"
-							class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+							onclick="window.location.reload()"
+							class="relative rounded-full bg-gray-700 p-1 text-gray-400 text-white outline-none"
 						>
 							<span class="absolute -inset-1.5"></span>
 							<span class="sr-only">Search Products</span>
-							<i class="fas fa-search p-2 rounded-full"></i>
+							<i
+								class="fas fa-search p-2 rounded-full text-gray-400"
+							></i>
 						</button>
 					</div>
 				</div>
@@ -194,7 +201,9 @@
 				</div>
 			</div>
 		</nav>
-		<!-- ---------------- SCROLL TO TOP BTN ---------------- -->
+		<!-- ------------------ NAVBAR ENDS ------------------ -->
+
+		<!-- SCROLL TO TOP BUTTON -->
 		<div
 			onclick="topFunction()"
 			id="scrollbtn"
@@ -213,112 +222,62 @@
 			</button>
 		</div>
 
-		<!-- ---------------------- MAIN ----------------------- -->
-		<section
-			class="bg-[#f8f8f8] py-8 antialiased dark:bg-gray-900 md:py-16"
-		>
-			<div class="mx-auto max-w-2xl px-4 2xl:px-0 mt-10">
-				<h2
-					class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl mb-2"
-				>
-					Thanks for your order!
-				</h2>
-				<p class="text-gray-500 dark:text-gray-400 mb-6 md:mb-8">
-					Your order
-					<a
-						href="#"
-						id="orderNumber"
-						class="font-medium text-gray-900 dark:text-white hover:underline"
-					></a>
-					will be processed within 24 hours during working days. We
-					will notify you by email once your order has been shipped.
-				</p>
-				<div
-					class="space-y-4 sm:space-y-2 rounded-lg border border-gray-100 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800 mb-6 md:mb-8"
-				>
-					<dl class="sm:flex items-center justify-between gap-4">
-						<dt
-							class="font-normal mb-1 sm:mb-0 text-gray-500 dark:text-gray-400"
-						>
-							Date
-						</dt>
-						<dd
-							class="font-medium text-gray-900 dark:text-white sm:text-end"
-							id="date"
-						>
-							22 June 2024
-						</dd>
-					</dl>
-					<dl class="sm:flex items-center justify-between gap-4">
-						<dt
-							class="font-normal mb-1 sm:mb-0 text-gray-500 dark:text-gray-400"
-						>
-							Amount
-						</dt>
-						<dd
-							class="font-medium text-gray-900 dark:text-white sm:text-end"
-							id="amount"
-						>
-							$0.00
-						</dd>
-					</dl>
-					<dl class="sm:flex items-center justify-between gap-4">
-						<dt
-							class="font-normal mb-1 sm:mb-0 text-gray-500 dark:text-gray-400"
-						>
-							Name
-						</dt>
-						<dd
-							class="font-medium text-gray-900 dark:text-white sm:text-end"
-							id="name"
-						>
-							Bonnie Green
-						</dd>
-					</dl>
-					<dl class="sm:flex items-center justify-between gap-4">
-						<dt
-							class="font-normal mb-1 sm:mb-0 text-gray-500 dark:text-gray-400"
-						>
-							Address
-						</dt>
-						<dd
-							class="font-medium text-gray-900 dark:text-white sm:text-end"
-							id="address"
-						>
-							123 Big Avenue, Suite 330, Boston, MA
-						</dd>
-					</dl>
-					<dl class="sm:flex items-center justify-between gap-4">
-						<dt
-							class="font-normal mb-1 sm:mb-0 text-gray-500 dark:text-gray-400"
-						>
-							Email
-						</dt>
-						<dd
-							class="font-medium text-gray-900 dark:text-white sm:text-end"
-							id="email"
-						>
-							name@example.com
-						</dd>
-					</dl>
-				</div>
-				<div class="flex items-center space-x-4">
-					<a
-						href="#"
-						class="text-white bg-[#1d4ed8] hover:bg-[#1e40af] focus:ring-4 focus:ring-[#93c5fd] font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-[#2563eb] dark:hover:bg-[#1d4ed8] focus:outline-none dark:focus:ring-[#1e40af]"
-						>Print Receipt</a
-					>
-					<a
-						href="./ProductsPage.html"
-						class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-[#1d4ed8] focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-						>Return to shopping</a
-					>
-				</div>
-			</div>
-		</section>
+		<!-- Search Section Start -->
 
-		<!-- --------------------- FOOTER ---------------------- -->
-		<footer class="bg-white dark:bg-gray-900 border-t-2 border-t-gray-400">
+		<form
+			class="max-w-xl mx-auto pt-24"
+			id="search-form"
+		>
+			<label
+				for="default-search"
+				class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+				>Search</label
+			>
+			<div class="relative">
+				<div
+					class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+				>
+					<svg
+						class="w-4 h-4 text-gray-500 dark:text-gray-400"
+						aria-hidden="true"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 20 20"
+					>
+						<path
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+						/>
+					</svg>
+				</div>
+				<input
+					type="search"
+					id="products-search-bar"
+					class="block w-full p-4 ps-10 text-sm text-gray-900 rounded-lg bg-gray-50 ring-2 ring-gray-600 focus:outline-none"
+					placeholder="Search Clothings, Electronics..."
+					required
+				/>
+				<button
+					type="submit"
+					class="text-white absolute inset-y-0 my-2 end-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+				>
+					Search
+				</button>
+			</div>
+		</form>
+
+		<div
+			id="search_results"
+			class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-y-8 gap-x-6 px-4 justify-evenly items-stretch mt-8 w-full"
+		></div>
+
+		<!-- Footer Section Start -->
+		<footer
+			class="bg-white dark:bg-gray-900 mt-24 border-t-2 border-t-gray-400"
+		>
 			<div class="mx-auto w-full max-w-screen-xl">
 				<div
 					class="grid items-start justify-evenly grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4"
@@ -581,8 +540,7 @@
 				</div>
 			</div>
 		</footer>
-
-		<!-- --------------------- SCRIPTS --------------------- -->
+		<!-- Footer Section End -->
 		<script
 			type="text/javascript"
 			src="./js/navbar.js"
@@ -593,7 +551,7 @@
 		></script>
 		<script
 			type="text/javascript"
-			src="./js/confirmation.js"
+			src="./js/search-page.js"
 		></script>
 	</body>
 </html>
