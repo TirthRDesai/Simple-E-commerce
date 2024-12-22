@@ -106,6 +106,6 @@ function ProceedToPayment() {
     if (isRequiredSatified()) {
         window.sessionStorage.setItem('checkoutDetails', JSON.stringify(details));
         window.sessionStorage.setItem('OrderNumber', Math.floor(Math.random() * 1000000000));
-        window.location.href = '../Confirmation.html';
+        window.location.href = './Confirmation.html';
     }
 }

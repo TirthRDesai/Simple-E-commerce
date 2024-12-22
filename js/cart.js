@@ -271,5 +271,5 @@ function redirectToCheckoutPage() {
 
     const encodedParams = btoa(JSON.stringify(params))
 
-    window.location.assign('../Checkout.html?params=' + encodedParams)
+    window.location.assign('./Checkout.html?params=' + encodedParams)
 }
